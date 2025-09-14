@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial - Dryyk Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .video-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .video-section h2 {
+            color: #667eea;
+            font-size: 2.3rem;
+            margin-bottom: 20px;
+        }
+
+        .video-placeholder {
+            background: linear-gradient(135deg, #f8f9ff, #e8f0fe);
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 60px 20px;
+            margin: 30px 0;
+            color: #667eea;
+        }
+
+        .video-placeholder h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .video-placeholder p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .tutorial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .tutorial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .tutorial-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .tutorial-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .tutorial-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .tutorial-card a {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .tutorial-card a:hover {
+            transform: scale(1.05);
+        }
+
+        .steps-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .steps-section h2 {
+            color: #667eea;
+            font-size: 2.3rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .steps-container {
+            display: grid;
+            gap: 25px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            padding: 25px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 25px;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .step-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .tips-section {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        .tips-section h2 {
+            font-size: 2.3rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tip-item h4 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .tip-item p {
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .cta-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .cta-button.secondary {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .faq-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .faq-section h2 {
+            color: #667eea;
+            font-size: 2.3rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .faq-container {
+            display: grid;
+            gap: 15px;
+        }
+
+        .faq-item {
+            border: 2px solid #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #667eea;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #f8f9ff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #e8f0fe;
+        }
+
+        .faq-question h4 {
+            color: #333;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: #667eea;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 200px;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .video-section,
+            .steps-section,
+            .tips-section,
+            .faq-section,
+            .cta-section {
+                padding: 25px;
+            }
+            
+            .tutorial-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Voltar ao Painel</a>
+        
+        <div class="header">
+            <h1>🎥 Veja o Tutorial</h1>
+            <p>Aprenda a utilizar nosso site Dryyk Soluções de forma simples e rápida</p>
+        </div>
+
+        <div class="video-section">
+            <h2>📹 Vídeo Tutorial</h2>
+            <p style="color: #666; margin-bottom: 20px;">Assista ao nosso vídeo tutorial completo:</p>
+            
+            <div class="video-placeholder">
+                <h3>🎬 Como Funciona o Nosso Painel</h3>
+                <p>Vídeo explicativo sobre como fazer pedidos</p>
+            </div>
+            
+            <div class="video-placeholder">
+                <h3>📚 Entenda Nosso Painel</h3>
+                <p>Tutorial detalhado sobre todas as funcionalidades</p>
+            </div>
+        </div>
+
+        <div class="tutorial-grid">
+            <div class="tutorial-card">
+                <span class="icon">📋</span>
+                <h3>Como Fazer Pedido</h3>
+                <p>Aprenda o passo a passo completo para realizar seus pedidos com segurança e eficiência.</p>
+                <a href="como-fazer-pedido.html">Ver Tutorial</a>
+            </div>
+
+            <div class="tutorial-card">
+                <span class="icon">💰</span>
+                <h3>Adicionar Saldo</h3>
+                <p>Saiba como adicionar saldo à sua conta usando PIX e outros métodos de pagamento.</p>
+                <a href="adicionar-saldo.html">Adicionar Saldo</a>
+            </div>
+
+            <div class="tutorial-card">
+                <span class="icon">⭐</span>
+                <h3>Serviços de Qualidade</h3>
+                <p>Conheça nossos serviços premium e suas garantias de qualidade.</p>
+                <a href="servicos-qualidade.html">Ver Serviços</a>
+            </div>
+
+            <div class="tutorial-card">
+                <span class="icon">📱</span>
+                <h3>Atualizações Instagram</h3>
+                <p>Informações importantes sobre as mudanças recentes do Instagram.</p>
+                <a href="atualizacoes-instagram.html">Ler Atualizações</a>
+            </div>
+        </div>
+
+        <div class="steps-section">
+            <h2>🚀 Como Usar o Dryyk Soluções</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>1. Cadastre-se</h4>
+                        <p>Cadastre-se em nosso painel, preencha todos os dados necessários e prepare-se para ficar famoso.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>2. Adicione fundos</h4>
+                        <p>Adicione dinheiro à sua conta SMM e esteja pronto para crescer como uma estrela e dar um novo patamar ao seu negócio.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>3. Escolha o serviço</h4>
+                        <p>Selecione um serviço, faça um pedido e prepare-se para começar a receber mais publicidade nas redes sociais.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>4. Aproveite a popularidade</h4>
+                        <p>Criaremos e prosseguiremos com um pedido e informaremos você quando terminar. Aproveite e fique conosco.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h2>💡 Dicas Importantes</h2>
+            <div class="tips-grid">
+                <div class="tip-item">
+                    <h4>⏱️ Tempo de Entrega</h4>
+                    <p>A entrega dos serviços pode variar de 3 minutos a 24 horas, dependendo do tipo de serviço escolhido.</p>
+                </div>
+                <div class="tip-item">
+                    <h4>🔗 Links Corretos</h4>
+                    <p>Informe o nome de usuário sem o @ e certifique-se de que o perfil está público.</p>
+                </div>
+                <div class="tip-item">
+                    <h4>📋 Leia as Descrições</h4>
+                    <p>Sempre leia a descrição completa do serviço antes de fazer o pedido.</p>
+                </div>
+                <div class="tip-item">
+                    <h4>⚠️ Evite Pedidos Simultâneos</h4>
+                    <p>Envie serviços para o mesmo perfil apenas após o pedido anterior ser concluído.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>❓ Nosso FAQ</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: #666;">Tire suas dúvidas em nosso FAQ abaixo</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>O que é um painel SMM?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Um painel SMM (Social Media Marketing) é uma plataforma que oferece serviços de marketing para redes sociais, como seguidores, curtidas, visualizações e comentários para impulsionar sua presença online.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Quais serviços SMM você oferece?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oferecemos uma ampla gama de serviços para Instagram, Facebook, YouTube, TikTok e outras redes sociais, incluindo seguidores, curtidas, visualizações, comentários e muito mais.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Seus serviços SMM são seguros para uso?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, todos os nossos serviços são 100% seguros e seguem as diretrizes das plataformas. Utilizamos métodos aprovados que não colocam sua conta em risco.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>O que é um pedido em massa?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Um pedido em massa permite que você faça múltiplos pedidos de uma só vez, economizando tempo e facilitando o gerenciamento de campanhas maiores.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 style="color: #667eea; margin-bottom: 20px;">🎯 Pronto para Começar?</h2>
+            <p style="color: #666; margin-bottom: 30px;">Agora que você conhece o básico, comece a usar nosso painel!</p>
+            <a href="adicionar-saldo.html" class="cta-button">💰 Adicionar Saldo</a>
+            <a href="como-fazer-pedido.html" class="cta-button secondary">📋 Fazer Primeiro Pedido</a>
+        </div>
+    </div>
+
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

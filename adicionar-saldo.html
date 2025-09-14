@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Saldo - Dryyk Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .alert-box h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .alert-box p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .payment-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9ff;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .payment-btn {
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .payment-btn:hover {
+            background: #e8f0fe;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .selected-indicator {
+            margin-left: auto;
+            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .pix-logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            background: linear-gradient(135deg, #32bcad, #28a99c);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(50, 188, 173, 0.3);
+        }
+        
+        .pix-icon {
+            font-size: 0.9rem;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .pix-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: pixPulse 2s infinite;
+        }
+        
+        @keyframes pixPulse {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            70% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.3; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+        
+        .payment-info {
+            flex: 1;
+        }
+        
+        .payment-features {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-top: 5px;
+        }
+        
+        .feature {
+            font-size: 0.8rem;
+            color: #28a745;
+            font-weight: 500;
+        }
+        
+        .selected-indicator {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .check-mark {
+            font-size: 1.5rem;
+            color: #28a745;
+            font-weight: bold;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .selection-glow {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, rgba(40, 167, 69, 0.3), transparent);
+            border-radius: 50%;
+            animation: selectionGlow 1.5s infinite;
+        }
+        
+        @keyframes selectionGlow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.3); opacity: 0.8; }
+        }
+        
+        .active-payment {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+            border-color: #28a745;
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.2);
+        }
+        
+        .active-payment:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(40, 167, 69, 0.3);
+        }
+        
+        .paypal-logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            background: linear-gradient(135deg, #0070ba, #003087);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 112, 186, 0.3);
+        }
+        
+        .paypal-icon {
+            font-size: 0.8rem;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .paypal-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: paypalPulse 2.5s infinite;
+        }
+        
+        @keyframes paypalPulse {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            70% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.3; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+        
+        .payment-btn:not(.active-payment) {
+            background: #f8f9ff;
+            border-color: #ddd;
+            opacity: 0.8;
+        }
+        
+        .payment-btn:not(.active-payment):hover {
+            opacity: 1;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .payment-btn:not(.active-payment) .check-mark {
+            color: #ccc;
+        }
+        
+        .payment-btn:not(.active-payment) .selection-glow {
+            display: none !important;
+        }
+
+        .amount-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .amount-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .calculator-container {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #e0e6ff;
+        }
+        
+        .calculator-display {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            background: white;
+            color: #333;
+            margin-bottom: 15px;
+            cursor: default;
+        }
+        
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .calc-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: 50px;
+        }
+        
+        .calc-number {
+            background: #667eea;
+            color: white;
+        }
+        
+        .calc-number:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+        
+        .calc-clear {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .calc-clear:hover {
+            background: #c0392b;
+        }
+        
+        .calc-backspace {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .calc-backspace:hover {
+            background: #e67e22;
+        }
+        
+        .calc-preset {
+            background: #27ae60;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .calc-preset:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .calc-zero {
+            background: #667eea;
+            color: white;
+        }
+        
+        .calc-zero:hover {
+            background: #5a6fd8;
+        }
+        
+        .calc-decimal {
+            background: #9b59b6;
+            color: white;
+        }
+        
+        .calc-decimal:hover {
+            background: #8e44ad;
+        }
+
+        .limits {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .history-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .history-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .history-stats {
+            display: flex;
+            gap: 20px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        
+        .no-transactions {
+            text-align: center;
+            padding: 40px 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            margin-top: 20px;
+            color: #666;
+        }
+        
+        .no-transactions p {
+            margin: 10px 0;
+        }
+        
+        .no-transactions p:first-child {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-table th {
+            background: #f8f9ff;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .history-table tr:hover {
+            background: #f8f9ff;
+        }
+
+        .amount-value {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .payment-icon {
+            width: 80px;
+            height: 50px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-weight: bold;
+            color: #333;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .payment-form,
+            .history-section {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .history-table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Voltar ao Painel</a>
+        
+        <div class="header">
+            <h1>💰 Adicionar Saldo</h1>
+            <p>Recarregue sua conta de forma rápida e segura</p>
+        </div>
+
+        <div class="alert-box">
+            <h2>🚨 ALERTA IMPORTANTE! 🚨</h2>
+            <p>Para concluir sua compra, selecione a forma de pagamento abaixo 👇</p>
+            <p>⚠️ <strong>Valor mínimo: R$5</strong> 💰 <strong>Sem limite máximo - Digite qualquer valor!</strong></p>
+            <p>Não perca tempo! Finalize sua compra agora! ⏳</p>
+        </div>
+
+        <div class="payment-form">
+            <form id="paymentForm">
+                <div class="form-group">
+                    <label>Método de Pagamento</label>
+                    
+                    <!-- Opção PIX Única -->
+                    <button type="button" class="payment-method payment-btn active-payment" id="pixBtn">
+                        <div class="pix-logo">
+                            <span class="pix-icon">PIX</span>
+                            <div class="pix-pulse"></div>
+                        </div>
+                        <div class="payment-info">
+                            <strong>PIX - Automático</strong>
+                            <div class="payment-features">
+                                <span class="feature">⚡ Aprovação instantânea</span>
+                                <span class="feature">🔒 100% Seguro</span>
+                                <span class="feature">💰 Sem taxas</span>
+                            </div>
+                        </div>
+                        <div class="selected-indicator">
+                            <span class="check-mark">✓</span>
+                            <div class="selection-glow"></div>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="payment-icons">
+                    <div class="payment-icon">PIX</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Valor (R$)</label>
+                    <div class="calculator-container">
+                        <input type="number" id="amount" class="amount-input calculator-display" placeholder="0,00" min="5" step="0.01" inputmode="numeric" pattern="[0-9]*" required readonly>
+                        <div class="calculator-grid">
+                            <button type="button" class="calc-btn calc-clear" onclick="clearCalculator()">C</button>
+                            <button type="button" class="calc-btn calc-backspace" onclick="backspaceCalculator()">⌫</button>
+                            <button type="button" class="calc-btn calc-preset" onclick="addPreset(100)">+100</button>
+                            <button type="button" class="calc-btn calc-preset" onclick="addPreset(500)">+500</button>
+                            
+                            <button type="button" class="calc-btn calc-number" onclick="addNumber('7')">7</button>
+                            <button type="button" class="calc-btn calc-number" onclick="addNumber('8')">8</button>
+                            <button type="button" class="calc-btn calc-number" onclick="addNumber('9')">9</button>
+                            <button type="button" class="calc-btn calc-preset" onclick="addPreset(1000)">+1K</button>
+                            
+                            <button type="button" class="calc-btn calc-number" onclick="addNumber('4')">4</button>
+                            <button type="button" class="calc-btn calc-number" onclick="addNumber('5')">5</button>
+                            <button type="button" class="calc-btn calc-number" onclick="addNumber('6')">6</button>
+                            <button type="button" class="calc-btn calc-preset" onclick="addPreset(5000)">+5K</button>
+                            
+                            <button type="button" class="calc-btn calc-number" onclick="addNumber('1')">1</button>
+                            <button type="button" class="calc-btn calc-number" onclick="addNumber('2')">2</button>
+                            <button type="button" class="calc-btn calc-number" onclick="addNumber('3')">3</button>
+                            <button type="button" class="calc-btn calc-preset" onclick="addPreset(10000)">+10K</button>
+                            
+                            <button type="button" class="calc-btn calc-zero" onclick="addNumber('0')">0</button>
+                            <button type="button" class="calc-btn calc-decimal" onclick="addDecimal()">.</button>
+                            <button type="button" class="calc-btn calc-preset" onclick="addPreset(50000)">+50K</button>
+                            <button type="button" class="calc-btn calc-preset" onclick="addPreset(100000)">+100K</button>
+                        </div>
+                    </div>
+                    <div class="limits">
+                        <span>Mínimo: R$ 5,00</span>
+                        <span style="color: #28a745; font-weight: bold;">💰 Sem limite máximo - Use a calculadora!</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    🚀 Gerar PIX e Finalizar Compra
+                </button>
+            </form>
+        </div>
+
+        <div class="history-section">
+            <h3>📊 Histórico de Transações - <span id="user-name"></span></h3>
+            <div class="history-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Total de Transações:</span>
+                    <span class="stat-value" id="total-transactions">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Valor Total:</span>
+                    <span class="stat-value" id="total-amount">R$ 0,00</span>
+                </div>
+            </div>
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Data</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="transactions-tbody">
+                    <!-- Transações serão carregadas dinamicamente -->
+                </tbody>
+            </table>
+            <div id="no-transactions" class="no-transactions" style="display: none;">
+                <p>📝 Nenhuma transação encontrada</p>
+                <p>Faça seu primeiro depósito para ver o histórico aqui!</p>
+            </div>
+        </div>
+        
+        <!-- Área do QR Code PIX -->
+        <div id="qr-section" class="payment-form" style="display: none; margin-top: 30px;">
+            <h3 style="text-align: center; color: #667eea; margin-bottom: 20px;">📱 QR Code PIX Gerado</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div style="text-align: center;">
+                    <h4 style="color: #333; margin-bottom: 15px;">🖼️ Escaneie o QR Code</h4>
+                    <div id="qr-code-display" style="display: flex; justify-content: center; margin: 20px 0;"></div>
+                    <button onclick="downloadQR()" style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; margin: 5px;">⬇️ Baixar PNG</button>
+                </div>
+                <div>
+                    <h4 style="color: #333; margin-bottom: 15px;">📋 Código Copia e Cola</h4>
+                    <textarea id="pix-code-area" readonly style="width: 100%; height: 100px; font-family: monospace; font-size: 0.8rem; padding: 10px; border: 1px solid #ddd; border-radius: 5px; background: #f8f9fa; resize: none;"></textarea>
+                    <button onclick="copyPixCode()" style="background: #17a2b8; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; margin-top: 10px; width: 100%;">📋 Copiar Código PIX</button>
+                    <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #667eea;">
+                        <h5 style="color: #667eea; margin-bottom: 10px;">📱 Como usar:</h5>
+                        <ol style="margin: 0; padding-left: 20px; color: #333; font-size: 0.9rem;">
+                            <li>Copie o código acima</li>
+                            <li>Abra seu app do banco</li>
+                            <li>Procure "PIX COPIA E COLA"</li>
+                            <li>Cole o código e confirme</li>
+                            <li>Seu saldo será creditado automaticamente</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="hideQRCode()" style="background: #6c757d; color: white; padding: 12px 30px; border: none; border-radius: 8px; cursor: pointer;">🔙 Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Library com múltiplos fallbacks -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js" onerror="loadQRCodeFallback()"></script>
+    <script>
+        function loadQRCodeFallback() {
+            console.log('Tentando CDN alternativo...');
+            const script = document.createElement('script');
+            script.src = 'https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js';
+            script.onerror = function() {
+                console.log('Tentando terceiro CDN...');
+                const script2 = document.createElement('script');
+                script2.src = 'https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js';
+                script2.onerror = function() {
+                    console.log('Usando biblioteca QR Code local...');
+                    loadLocalQRCode();
+                };
+                document.head.appendChild(script2);
+            };
+            document.head.appendChild(script);
+        }
+        
+        function loadLocalQRCode() {
+            // Biblioteca QR Code simplificada local
+            window.QRCode = {
+                toCanvas: function(element, text, options, callback) {
+                    // Fallback: criar um QR Code usando API externa
+                    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${options.width}x${options.height}&data=${encodeURIComponent(text)}`;
+                    const img = document.createElement('img');
+                    img.src = qrUrl;
+                    img.style.width = options.width + 'px';
+                    img.style.height = options.height + 'px';
+                    img.onload = function() {
+                        element.innerHTML = '';
+                        element.appendChild(img);
+                        callback(null);
+                    };
+                    img.onerror = function() {
+                        callback('Erro ao carregar QR Code');
+                    };
+                },
+                CorrectLevel: { M: 'M' }
+            };
+        }
+    </script>
+    
+    <script>
+        // Sistema PIX único
+        document.getElementById('pixBtn').addEventListener('click', function() {
+            // Efeito de clique
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = 'translateY(-3px)';
+            }, 100);
+            
+            // Animação do check mark
+            const checkMark = this.querySelector('.check-mark');
+            checkMark.style.animation = 'none';
+            setTimeout(() => {
+                checkMark.style.animation = 'checkBounce 0.6s ease';
+            }, 10);
+            
+            // Feedback visual temporário
+            const originalText = this.querySelector('strong').textContent;
+            this.querySelector('strong').textContent = '✅ PIX Confirmado!';
+            setTimeout(() => {
+                this.querySelector('strong').textContent = originalText;
+            }, 1500);
+        });
+        
+        // Adicionar animação de check bounce
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes checkBounce {
+                0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+                40% { transform: translateY(-10px); }
+                60% { transform: translateY(-5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        let currentQRCode = null;
+        
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const amount = document.getElementById('amount').value;
+            
+            // Validação melhorada
+            if (!amount || amount === '') {
+                alert('⚠️ Por favor, insira um valor válido.');
+                document.getElementById('amount').focus();
+                return;
+            }
+            
+            const numAmount = parseFloat(amount);
+            
+            if (isNaN(numAmount) || numAmount < 5) {
+                alert('⚠️ Por favor, insira um valor mínimo de R$ 5,00. Não há limite máximo!');
+                document.getElementById('amount').focus();
+                return;
+            }
+            
+            // Gerar QR Code PIX
+            generatePixQR(numAmount);
+        });
+        
+        function generatePixQR(amount) {
+            const pixKey = '763d41f9-8518-4aa0-a8de-7d05ef488569';
+            
+            // Gerar código PIX
+            let pixCode = '00020126580014br.gov.bcb.pix0136' + pixKey + '5204000053039865802BR';
+            
+            // Adicionar valor
+            const amountStr = amount.toFixed(2);
+            pixCode += '54' + amountStr.length.toString().padStart(2, '0') + amountStr;
+            
+            // Adicionar informações do beneficiário
+            pixCode += '5912DRYYKK LUCAA6014RIO DE JANEIRO62070503***6304';
+            
+            // Adicionar checksum simples
+            const simpleChecksum = (pixCode.length % 10000).toString().padStart(4, '0');
+            pixCode += simpleChecksum;
+            
+            // Obter elemento para exibir QR Code
+            const qrDisplay = document.getElementById('qr-code-display');
+            
+            // Aguardar carregamento da biblioteca QRCode
+             if (typeof QRCode === 'undefined') {
+                 console.log('Aguardando carregamento da biblioteca QR Code...');
+                 setTimeout(function() {
+                     if (typeof QRCode === 'undefined') {
+                         loadLocalQRCode();
+                     }
+                     generatePixQRCode(pixCode, qrDisplay);
+                 }, 1000);
+                 return;
+             }
+             
+             generatePixQRCode(pixCode, qrDisplay);
+         }
+         
+         function generatePixQRCode(pixCode, qrDisplay) {
+             // Limpar QR Code anterior
+             qrDisplay.innerHTML = '';
+             
+             // Gerar QR Code
+             try {
+                 QRCode.toCanvas(qrDisplay, pixCode, {
+                     width: 300,
+                     height: 300,
+                     colorDark: '#000000',
+                     colorLight: '#ffffff',
+                     correctLevel: QRCode.CorrectLevel.M
+                 }, function (error) {
+                     if (error) {
+                         console.error('QR Code Error:', error);
+                         // Fallback: usar API externa para gerar QR Code
+                         const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(pixCode)}`;
+                         qrDisplay.innerHTML = `<img src="${qrUrl}" alt="QR Code PIX" style="width: 300px; height: 300px; border: 1px solid #ddd; border-radius: 8px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                         <div style="display: none; width: 300px; height: 300px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; box-sizing: border-box;">
+                             <div>
+                                 <p><strong>Use o código copia-e-cola</strong></p>
+                                 <p>QR Code não disponível</p>
+                             </div>
+                         </div>`;
+                         currentQRCode = qrDisplay.querySelector('img');
+                     } else {
+                         currentQRCode = qrDisplay.querySelector('canvas') || qrDisplay.querySelector('img');
+                     }
+                     
+                     // Preencher código copia-e-cola
+                     document.getElementById('pix-code-area').value = pixCode;
+                     
+                     // Adicionar transação ao histórico
+                     addTransaction(amount);
+                     
+                     // Mostrar seção QR Code
+                     document.getElementById('qr-section').style.display = 'block';
+                     
+                     // Scroll para o QR Code
+                     document.getElementById('qr-section').scrollIntoView({ behavior: 'smooth' });
+                 });
+             } catch (err) {
+                  console.error('QR Code Generation Error:', err);
+                  // Fallback final: usar API externa garantida
+                  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(pixCode)}`;
+                  qrDisplay.innerHTML = `<img src="${qrUrl}" alt="QR Code PIX" style="width: 300px; height: 300px; border: 1px solid #ddd; border-radius: 8px;">`;
+                  currentQRCode = qrDisplay.querySelector('img');
+                  
+                  // Preencher código copia-e-cola
+                  document.getElementById('pix-code-area').value = pixCode;
+                  
+                  // Mostrar seção QR Code
+                  document.getElementById('qr-section').style.display = 'block';
+                  
+                  // Scroll para o QR Code
+                  document.getElementById('qr-section').scrollIntoView({ behavior: 'smooth' });
+              }
+         }
+        
+        function copyPixCode() {
+            const pixCodeArea = document.getElementById('pix-code-area');
+            
+            if (!pixCodeArea.value) {
+                alert('❌ Nenhum código PIX disponível!');
+                return;
+            }
+            
+            pixCodeArea.select();
+            pixCodeArea.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                alert('✅ Código PIX copiado! Cole no seu app do banco na opção "PIX COPIA E COLA"');
+            } catch (err) {
+                navigator.clipboard.writeText(pixCodeArea.value).then(function() {
+                    alert('✅ Código PIX copiado! Cole no seu app do banco na opção "PIX COPIA E COLA"');
+                }).catch(function() {
+                    alert('❌ Erro ao copiar código PIX. Tente selecionar e copiar manualmente.');
+                });
+            }
+        }
+        
+        function downloadQR() {
+            if (!currentQRCode) {
+                alert('❌ Nenhum QR Code gerado!');
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.download = 'qrcode-pix-dryyk-solucoes.png';
+            link.href = currentQRCode.toDataURL();
+            link.click();
+        }
+        
+        function hideQRCode() {
+             document.getElementById('qr-section').style.display = 'none';
+             document.getElementById('paymentForm').scrollIntoView({ behavior: 'smooth' });
+         }
+         
+
+        
+        // Sistema de calculadora
+        let calculatorValue = '';
+        
+        function addNumber(num) {
+            calculatorValue += num;
+            updateDisplay();
+        }
+        
+        function addDecimal() {
+            if (!calculatorValue.includes('.')) {
+                calculatorValue += calculatorValue === '' ? '0.' : '.';
+                updateDisplay();
+            }
+        }
+        
+        function addPreset(amount) {
+            const currentValue = parseFloat(calculatorValue) || 0;
+            calculatorValue = (currentValue + amount).toString();
+            updateDisplay();
+        }
+        
+        function clearCalculator() {
+            calculatorValue = '';
+            updateDisplay();
+        }
+        
+        function backspaceCalculator() {
+            calculatorValue = calculatorValue.slice(0, -1);
+            updateDisplay();
+        }
+        
+        function updateDisplay() {
+            const display = document.getElementById('amount');
+            const value = parseFloat(calculatorValue) || 0;
+            display.value = value.toFixed(2);
+            
+            // Validação visual
+            if (value >= 5) {
+                display.style.borderColor = '#28a745';
+                display.style.color = '#28a745';
+            } else if (value > 0) {
+                display.style.borderColor = '#f39c12';
+                display.style.color = '#f39c12';
+            } else {
+                display.style.borderColor = '#ddd';
+                display.style.color = '#333';
+            }
+        }
+        
+        // Inicializar display
+         updateDisplay();
+         
+         // Sistema de histórico personalizado
+         function loadUserTransactions() {
+             const currentUser = localStorage.getItem('currentUser') || 'Usuário';
+             document.getElementById('user-name').textContent = currentUser;
+             
+             // Carregar transações do usuário
+             const userTransactions = JSON.parse(localStorage.getItem(`transactions_${currentUser}`)) || [];
+             
+             const tbody = document.getElementById('transactions-tbody');
+             const noTransactions = document.getElementById('no-transactions');
+             
+             if (userTransactions.length === 0) {
+                 tbody.innerHTML = '';
+                 noTransactions.style.display = 'block';
+                 document.querySelector('.history-table').style.display = 'none';
+                 document.getElementById('total-transactions').textContent = '0';
+                 document.getElementById('total-amount').textContent = 'R$ 0,00';
+             } else {
+                 noTransactions.style.display = 'none';
+                 document.querySelector('.history-table').style.display = 'table';
+                 
+                 // Calcular estatísticas
+                 const totalAmount = userTransactions.reduce((sum, t) => sum + t.amount, 0);
+                 document.getElementById('total-transactions').textContent = userTransactions.length;
+                 document.getElementById('total-amount').textContent = `R$ ${totalAmount.toFixed(2).replace('.', ',')}`;
+                 
+                 // Renderizar transações (mais recentes primeiro)
+                 tbody.innerHTML = userTransactions.reverse().map(transaction => `
+                     <tr>
+                         <td>#${transaction.id}</td>
+                         <td>${transaction.date}</td>
+                         <td class="amount-value">R$ ${transaction.amount.toFixed(2).replace('.', ',')}</td>
+                         <td><span style="color: #27ae60;">✅ ${transaction.status}</span></td>
+                     </tr>
+                 `).join('');
+             }
+         }
+         
+         function addTransaction(amount) {
+             const currentUser = localStorage.getItem('currentUser') || 'Usuário';
+             const userTransactions = JSON.parse(localStorage.getItem(`transactions_${currentUser}`)) || [];
+             
+             // Gerar ID único
+             const newId = Date.now().toString().slice(-4);
+             
+             // Criar nova transação
+             const newTransaction = {
+                 id: newId,
+                 date: new Date().toLocaleString('pt-BR'),
+                 amount: amount,
+                 status: 'Aprovado'
+             };
+             
+             // Adicionar à lista
+             userTransactions.push(newTransaction);
+             
+             // Salvar no localStorage
+             localStorage.setItem(`transactions_${currentUser}`, JSON.stringify(userTransactions));
+             
+             // Recarregar histórico
+             loadUserTransactions();
+         }
+         
+         // Carregar transações ao inicializar
+         loadUserTransactions();
+    </script>
+</body>
+</html>

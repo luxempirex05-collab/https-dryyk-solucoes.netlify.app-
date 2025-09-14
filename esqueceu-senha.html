@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esqueceu sua senha? - Dryyk Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .recovery-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .recovery-container h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .recovery-container .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .step-number {
+            background: #ddd;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .step-number.active {
+            background: #667eea;
+        }
+
+        .step-number.completed {
+            background: #27ae60;
+        }
+
+        .step-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group input.error {
+            border-color: #e74c3c;
+        }
+
+        .form-group input.success {
+            border-color: #27ae60;
+        }
+
+        .help-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .help-text.error {
+            color: #e74c3c;
+        }
+
+        .help-text.success {
+            color: #27ae60;
+        }
+
+        .action-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .action-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .action-btn.success {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .info-box {
+            background: #e8f4fd;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-box h4 {
+            color: #0c5460;
+            margin-bottom: 8px;
+        }
+
+        .info-box p {
+            color: #0c5460;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .success-box h3 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+
+        .success-box p {
+            color: #155724;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .login-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .recovery-container {
+                padding: 25px;
+                margin: 10px;
+            }
+            
+            .recovery-container h1 {
+                font-size: 2rem;
+            }
+            
+            .step {
+                margin: 0 5px;
+            }
+            
+            .step-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="recovery-container">
+        <a href="login.html" class="back-link">← Voltar ao Login</a>
+        
+        <h1>🔑 Esqueceu sua senha?</h1>
+        <p class="subtitle">Não se preocupe! Vamos ajudá-lo a recuperar o acesso à sua conta.</p>
+        
+        <div class="step-indicator">
+            <div class="step">
+                <div class="step-number active" id="step1">1</div>
+                <div class="step-text">Informações</div>
+            </div>
+            <div class="step">
+                <div class="step-number" id="step2">2</div>
+                <div class="step-text">Confirmação</div>
+            </div>
+        </div>
+
+        <!-- Etapa 1: Informações do usuário -->
+        <div class="form-section active" id="section1">
+            <div class="info-box">
+                <h4>📧 Como funciona?</h4>
+                <p>Digite suas informações de usuário abaixo. Enviaremos um link para redefinir sua senha para o e-mail cadastrado em sua conta.</p>
+            </div>
+            
+            <form id="recoveryForm">
+                <div class="form-group">
+                    <label for="userInfo">Suas informações de usuário</label>
+                    <input type="text" id="userInfo" placeholder="Digite seu usuário ou e-mail" required>
+                    <div class="help-text" id="userInfoHelp">Digite seu nome de usuário ou e-mail cadastrado.</div>
+                </div>
+                
+                <button type="submit" class="action-btn" id="submitBtn">📧 Enviar para meu e-mail</button>
+            </form>
+        </div>
+
+        <!-- Etapa 2: Confirmação -->
+        <div class="form-section" id="section2">
+            <div class="success-box">
+                <h3>✅ E-mail enviado com sucesso!</h3>
+                <p>Enviamos um link para redefinir sua senha para o e-mail cadastrado em sua conta. Verifique sua caixa de entrada e spam.</p>
+            </div>
+            
+            <div class="info-box">
+                <h4>📧 Simulação do E-mail Recebido:</h4>
+                <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px; padding: 15px; margin: 10px 0; font-family: monospace; font-size: 0.9rem;">
+                    <strong>De:</strong> PAINEL SMM &lt;ultrasmm@ultrasmm.online&gt;<br>
+                    <strong>Para:</strong> usuario@exemplo.com<br>
+                    <strong>Assunto:</strong> Redefinir sua senha - Dryyk Soluções<br><br>
+                    
+                    <strong>Seu código de verificação para alterar sua senha:</strong><br>
+                    <a href="redefinir-senha.html?token=55b3d736342156c9264a0f2f82fce41ea9ecd" style="color: #667eea; text-decoration: underline;" target="_blank">
+                        https://ultrasmm.online/resetpassword/55b3d736342156c9264a0f2f82fce41ea9ecd
+                    </a>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4>📝 Próximos passos:</h4>
+                <p>1. Verifique seu e-mail<br>
+                2. Clique no link recebido<br>
+                3. Defina sua nova senha<br>
+                4. Faça login com a nova senha</p>
+                
+                <div style="text-align: center; margin-top: 15px;">
+                    <a href="redefinir-senha.html?token=55b3d736342156c9264a0f2f82fce41ea9ecd" style="background: #667eea; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">
+                        🔗 Acessar Link de Redefinição
+                    </a>
+                </div>
+            </div>
+            
+            <button type="button" class="action-btn success" onclick="resendEmail()">📧 Reenviar e-mail</button>
+        </div>
+        
+        <div class="login-link">
+            <p>Lembrou da senha? <a href="login.html">Fazer login</a></p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('recoveryForm');
+        const userInfo = document.getElementById('userInfo');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        // Validação do campo de usuário
+        userInfo.addEventListener('input', function() {
+            const value = this.value.trim();
+            const helpEl = document.getElementById('userInfoHelp');
+            
+            if (value.length === 0) {
+                this.className = '';
+                helpEl.textContent = 'Digite seu nome de usuário ou e-mail cadastrado.';
+                helpEl.className = 'help-text';
+            } else if (value.length >= 3) {
+                this.className = 'success';
+                helpEl.textContent = '✓ Informação válida.';
+                helpEl.className = 'help-text success';
+            } else {
+                this.className = 'error';
+                helpEl.textContent = '✗ Digite pelo menos 3 caracteres.';
+                helpEl.className = 'help-text error';
+            }
+        });
+        
+        // Submissão do formulário
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const value = userInfo.value.trim();
+            
+            if (value.length < 3) {
+                userInfo.className = 'error';
+                document.getElementById('userInfoHelp').textContent = '✗ Digite pelo menos 3 caracteres.';
+                document.getElementById('userInfoHelp').className = 'help-text error';
+                return;
+            }
+            
+            // Simular envio de e-mail
+            submitBtn.disabled = true;
+            submitBtn.textContent = '📧 Enviando...';
+            
+            setTimeout(function() {
+                // Avançar para a próxima etapa
+                document.getElementById('section1').classList.remove('active');
+                document.getElementById('section2').classList.add('active');
+                
+                // Atualizar indicadores de etapa
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step1').classList.add('completed');
+                document.getElementById('step2').classList.add('active');
+                
+                submitBtn.disabled = false;
+                submitBtn.textContent = '📧 Enviar para meu e-mail';
+            }, 2000);
+        });
+        
+        // Função para reenviar e-mail
+        function resendEmail() {
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = '📧 Reenviando...';
+            
+            setTimeout(function() {
+                alert('✅ E-mail reenviado com sucesso!\n\nVerifique sua caixa de entrada e spam.');
+                btn.disabled = false;
+                btn.textContent = '📧 Reenviar e-mail';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

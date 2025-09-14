@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Conta - Dryyk Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .account-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .account-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .account-section h2 {
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group input[readonly] {
+            background: #f8f9ff;
+            color: #666;
+        }
+
+        .balance-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .balance-card {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #667eea;
+        }
+
+        .balance-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .balance-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .spent-card {
+            border-color: #e74c3c;
+        }
+
+        .spent-card .balance-value {
+            color: #e74c3c;
+        }
+
+        .password-section {
+            background: #fff3cd;
+            border: 2px solid #f39c12;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .password-section h3 {
+            color: #f39c12;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .api-section {
+            background: #e8f5e8;
+            border: 2px solid #27ae60;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .api-section h3 {
+            color: #27ae60;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .api-link {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        .api-key {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #219a52;
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .save-btn.password {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .save-btn.settings {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .info-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        .timezone-info {
+            background: #e8f0fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .timezone-info h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .timezone-info p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .account-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .account-section {
+                padding: 20px;
+            }
+            
+            .balance-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Voltar ao Painel</a>
+        
+        <div class="header">
+            <h1>👤 Minha Conta</h1>
+            <p>Gerencie suas informações pessoais e configurações</p>
+        </div>
+
+        <div class="account-grid">
+            <!-- Informações Pessoais -->
+            <div class="account-section">
+                <h2>📝 Informações Pessoais</h2>
+                <form id="profileForm">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" value="" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Endereço de email</label>
+                        <input type="email" id="email" value="" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Número de telefone</label>
+                        <input type="tel" id="phone" value="+55 11 99999-9999" required>
+                    </div>
+                    
+                    <button type="submit" class="save-btn">💾 Salvar Informações</button>
+                </form>
+            </div>
+
+            <!-- Saldo e Estatísticas -->
+            <div class="account-section">
+                <h2>💰 Saldo e Estatísticas</h2>
+                <div class="balance-info">
+                    <div class="balance-card">
+                        <span class="balance-value">R$ 0,00</span>
+                        <span class="balance-label">Saldo Atual</span>
+                    </div>
+                    <div class="balance-card spent-card">
+                        <span class="balance-value">R$ 0,00</span>
+                        <span class="balance-label">Valor Gasto</span>
+                    </div>
+                </div>
+                
+                <div class="info-text">
+                    <p><strong>Total de pedidos:</strong> 0</p>
+                    <p><strong>Membro desde:</strong> Hoje</p>
+                    <p><strong>Status da conta:</strong> Ativa</p>
+                </div>
+                
+                <a href="adicionar-saldo.html" class="save-btn" style="text-decoration: none; display: block; text-align: center; margin-top: 20px;">💳 Adicionar Saldo</a>
+            </div>
+
+            <!-- Alterar Senha -->
+            <div class="account-section">
+                <h2>🔒 Segurança</h2>
+                <div class="password-section">
+                    <h3>Alterar Senha</h3>
+                    <form id="passwordForm">
+                        <div class="form-group">
+                            <label for="currentPassword">Senha atual</label>
+                            <input type="password" id="currentPassword" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="newPassword">Nova Senha</label>
+                            <input type="password" id="newPassword" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirme a nova senha</label>
+                            <input type="password" id="confirmPassword" required>
+                        </div>
+                        
+                        <button type="submit" class="save-btn password">🔐 Alterar Senha</button>
+                    </form>
+                </div>
+                
+                <div class="info-text">
+                    <p><strong>Dica de segurança:</strong> Use uma senha forte com pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e símbolos.</p>
+                </div>
+            </div>
+
+            <!-- Configurações e API -->
+            <div class="account-section">
+                <h2>⚙️ Configurações</h2>
+                
+                <div class="form-group">
+                    <label for="timezone">Timezone</label>
+                    <select id="timezone">
+                        <option value="-3" selected>(UTC -3:00) Argentina, Brazil, French Guiana, Uruguay</option>
+                        <option value="-2">(UTC -2:00) South Georgia and the South Sandwich Islands</option>
+                        <option value="-1">(UTC -1:00) Azores, Cape Verde</option>
+                        <option value="0">(UTC +0:00) London, Dublin, Lisbon</option>
+                        <option value="1">(UTC +1:00) Berlin, Madrid, Paris</option>
+                        <option value="2">(UTC +2:00) Cairo, Helsinki, Athens</option>
+                    </select>
+                </div>
+                
+                <div class="timezone-info">
+                    <h4>ℹ️ Informação sobre Timezone</h4>
+                    <p>O timezone selecionado afeta a exibição de horários em relatórios, histórico de pedidos e notificações. Certifique-se de selecionar o timezone correto para sua localização.</p>
+                </div>
+                
+                <button type="button" class="save-btn settings" onclick="saveSettings()">⚙️ Salvar Configurações</button>
+                
+                <div class="api-section">
+                    <h3>🔗 Informações da API</h3>
+                    
+                    <div class="form-group">
+                        <label>API Link</label>
+                        <div class="api-link">
+                            <code>https://ultrasmm.online/api/v2</code>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Chave API</label>
+                        <div class="api-key">
+                            <code id="apiKey">abc123def456ghi789jkl012mno345pqr678</code>
+                            <button type="button" class="copy-btn" onclick="copyApiKey()">📋 Copiar</button>
+                        </div>
+                    </div>
+                    
+                    <div class="info-text">
+                        <p><strong>⚠️ Importante:</strong> Mantenha sua chave API em segurança. Não compartilhe com terceiros. Use-a para integrar nossos serviços em suas aplicações.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Formulário de perfil
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            
+            if (!username || !email || !phone) {
+                alert('⚠️ Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            alert('✅ Informações pessoais atualizadas com sucesso!');
+        });
+        
+        // Formulário de senha
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                alert('⚠️ Por favor, preencha todos os campos de senha.');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                alert('⚠️ A nova senha e a confirmação não coincidem.');
+                return;
+            }
+            
+            if (newPassword.length < 8) {
+                alert('⚠️ A nova senha deve ter pelo menos 8 caracteres.');
+                return;
+            }
+            
+            alert('✅ Senha alterada com sucesso!');
+            
+            // Limpar campos
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        });
+        
+        // Salvar configurações
+        function saveSettings() {
+            const timezone = document.getElementById('timezone').value;
+            alert('✅ Configurações salvas com sucesso!\n\nTimezone: UTC ' + (timezone >= 0 ? '+' : '') + timezone + ':00');
+        }
+        
+        // Copiar chave API
+        function copyApiKey() {
+            const apiKey = document.getElementById('apiKey').textContent;
+            
+            navigator.clipboard.writeText(apiKey).then(function() {
+                alert('📋 Chave API copiada para a área de transferência!');
+            }).catch(function() {
+                // Fallback para navegadores mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = apiKey;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('📋 Chave API copiada para a área de transferência!');
+            });
+        }});
+        
+        // Carregar dados do usuário logado
+         function loadUserData() {
+             const loggedUser = localStorage.getItem('dryyk_logged_user');
+             const usernameField = document.getElementById('username');
+             const emailField = document.getElementById('email');
+             const phoneField = document.getElementById('phone');
+             
+             if (loggedUser) {
+                 // Preencher username
+                 if (usernameField) {
+                     usernameField.value = loggedUser;
+                 }
+                 
+                 // Gerar email baseado no usuário
+                 if (emailField) {
+                     const domains = ['gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com'];
+                     const randomDomain = domains[Math.floor(Math.random() * domains.length)];
+                     emailField.value = loggedUser + '@' + randomDomain;
+                 }
+                 
+                 // Gerar telefone aleatório
+                 if (phoneField) {
+                     const ddd = ['11', '21', '31', '41', '51', '61', '71', '81', '85', '62'][Math.floor(Math.random() * 10)];
+                     const numero = '9' + Math.floor(Math.random() * 10000).toString().padStart(4, '0') + '-' + Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+                     phoneField.value = '(' + ddd + ') ' + numero;
+                 }
+             }
+         }
+        
+        // Executar quando a página carregar
+        document.addEventListener('DOMContentLoaded', loadUserData);
+    </script>
+</body>
+</html>

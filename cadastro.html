@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Dryyk Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 120px 20px 40px;
+        }
+
+        .register-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .register-card h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .register-card .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group input.error {
+            border-color: #e74c3c;
+        }
+
+        .form-group input.success {
+            border-color: #27ae60;
+        }
+
+        .help-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .help-text.error {
+            color: #e74c3c;
+        }
+
+        .help-text.success {
+            color: #27ae60;
+        }
+
+        .password-strength {
+            margin-top: 8px;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: #eee;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-weak { background: #e74c3c; width: 25%; }
+        .strength-fair { background: #f39c12; width: 50%; }
+        .strength-good { background: #f1c40f; width: 75%; }
+        .strength-strong { background: #27ae60; width: 100%; }
+
+        .strength-text {
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .register-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .register-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .login-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .terms {
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+            line-height: 1.4;
+            margin-top: 15px;
+        }
+
+        .terms a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 100px 15px 20px;
+            }
+            
+            .register-card {
+                padding: 25px;
+            }
+            
+            .register-card h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="login.html" class="logo">🚀 Dryyk Soluções</a>
+            <div class="nav-links">
+                <a href="login.html">Login</a>
+                <a href="nossos-servicos.html">Serviços</a>
+                <a href="tutorial.html">Tutorial</a>
+                <a href="cadastro.html">Cadastro</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="register-card">
+            <h1>📝 Cadastro</h1>
+            <p class="subtitle">Crie sua conta e comece a usar nossos serviços</p>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="username">Nome de Usuário</label>
+                    <input type="text" id="username" required>
+                    <div class="help-text" id="usernameHelp">Não use caracteres especiais no usuário.</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required>
+                    <div class="help-text" id="emailHelp">Digite um e-mail válido.</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="whatsapp">WhatsApp</label>
+                    <input type="tel" id="whatsapp" placeholder="(11) 99999-9999" required>
+                    <div class="help-text" id="whatsappHelp">Digite seu número com DDD.</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" required>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <div class="strength-text" id="strengthText">Digite uma senha forte</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirme sua senha</label>
+                    <input type="password" id="confirmPassword" required>
+                    <div class="help-text" id="confirmHelp">As senhas devem coincidir.</div>
+                </div>
+                
+                <button type="submit" class="register-btn" id="submitBtn" disabled>🚀 Criar Conta</button>
+                
+                <div class="terms">
+                    Ao criar uma conta, você concorda com nossos <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>.
+                </div>
+            </form>
+            
+            <div class="login-link">
+                <p>Já tem uma conta? <a href="login.html">Entrar</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('registerForm');
+        const username = document.getElementById('username');
+        const email = document.getElementById('email');
+        const whatsapp = document.getElementById('whatsapp');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        // Validação de nome de usuário
+        username.addEventListener('input', function() {
+            const value = this.value;
+            const isValid = /^[a-zA-Z0-9_]+$/.test(value) && value.length >= 3;
+            
+            if (value.length === 0) {
+                this.className = '';
+                document.getElementById('usernameHelp').textContent = 'Não use caracteres especiais no usuário.';
+                document.getElementById('usernameHelp').className = 'help-text';
+            } else if (isValid) {
+                this.className = 'success';
+                document.getElementById('usernameHelp').textContent = '✓ Nome de usuário válido.';
+                document.getElementById('usernameHelp').className = 'help-text success';
+            } else {
+                this.className = 'error';
+                document.getElementById('usernameHelp').textContent = '✗ Use apenas letras, números e underscore. Mínimo 3 caracteres.';
+                document.getElementById('usernameHelp').className = 'help-text error';
+            }
+            
+            checkFormValidity();
+        });
+        
+        // Validação de e-mail
+        email.addEventListener('input', function() {
+            const value = this.value;
+            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+            
+            if (value.length === 0) {
+                this.className = '';
+                document.getElementById('emailHelp').textContent = 'Digite um e-mail válido.';
+                document.getElementById('emailHelp').className = 'help-text';
+            } else if (isValid) {
+                this.className = 'success';
+                document.getElementById('emailHelp').textContent = '✓ E-mail válido.';
+                document.getElementById('emailHelp').className = 'help-text success';
+            } else {
+                this.className = 'error';
+                document.getElementById('emailHelp').textContent = '✗ Digite um e-mail válido.';
+                document.getElementById('emailHelp').className = 'help-text error';
+            }
+            
+            checkFormValidity();
+        });
+        
+        // Formatação e validação de WhatsApp
+        whatsapp.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            
+            if (value.length >= 11) {
+                value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+            } else if (value.length >= 7) {
+                value = value.replace(/^(\d{2})(\d{4,5})/, '($1) $2');
+            } else if (value.length >= 3) {
+                value = value.replace(/^(\d{2})/, '($1) ');
+            }
+            
+            this.value = value;
+            
+            const isValid = value.replace(/\D/g, '').length === 11;
+            
+            if (value.length === 0) {
+                this.className = '';
+                document.getElementById('whatsappHelp').textContent = 'Digite seu número com DDD.';
+                document.getElementById('whatsappHelp').className = 'help-text';
+            } else if (isValid) {
+                this.className = 'success';
+                document.getElementById('whatsappHelp').textContent = '✓ Número válido.';
+                document.getElementById('whatsappHelp').className = 'help-text success';
+            } else {
+                this.className = 'error';
+                document.getElementById('whatsappHelp').textContent = '✗ Digite um número válido com DDD.';
+                document.getElementById('whatsappHelp').className = 'help-text error';
+            }
+            
+            checkFormValidity();
+        });
+        
+        // Validação de força da senha
+        password.addEventListener('input', function() {
+            const value = this.value;
+            let strength = 0;
+            let strengthText = '';
+            let strengthClass = '';
+            
+            if (value.length >= 8) strength++;
+            if (/[a-z]/.test(value)) strength++;
+            if (/[A-Z]/.test(value)) strength++;
+            if (/[0-9]/.test(value)) strength++;
+            if (/[^A-Za-z0-9]/.test(value)) strength++;
+            
+            const strengthFill = document.getElementById('strengthFill');
+            const strengthTextEl = document.getElementById('strengthText');
+            
+            if (value.length === 0) {
+                strengthFill.className = 'strength-fill';
+                strengthText = 'Digite uma senha forte';
+                this.className = '';
+            } else if (strength <= 2) {
+                strengthFill.className = 'strength-fill strength-weak';
+                strengthText = 'Senha fraca';
+                this.className = 'error';
+            } else if (strength === 3) {
+                strengthFill.className = 'strength-fill strength-fair';
+                strengthText = 'Senha razoável';
+                this.className = '';
+            } else if (strength === 4) {
+                strengthFill.className = 'strength-fill strength-good';
+                strengthText = 'Senha boa';
+                this.className = 'success';
+            } else {
+                strengthFill.className = 'strength-fill strength-strong';
+                strengthText = 'Senha forte';
+                this.className = 'success';
+            }
+            
+            strengthTextEl.textContent = strengthText;
+            
+            checkPasswordMatch();
+            checkFormValidity();
+        });
+        
+        // Validação de confirmação de senha
+        confirmPassword.addEventListener('input', checkPasswordMatch);
+        
+        function checkPasswordMatch() {
+            const pass = password.value;
+            const confirm = confirmPassword.value;
+            const helpEl = document.getElementById('confirmHelp');
+            
+            if (confirm.length === 0) {
+                confirmPassword.className = '';
+                helpEl.textContent = 'As senhas devem coincidir.';
+                helpEl.className = 'help-text';
+            } else if (pass === confirm) {
+                confirmPassword.className = 'success';
+                helpEl.textContent = '✓ Senhas coincidem.';
+                helpEl.className = 'help-text success';
+            } else {
+                confirmPassword.className = 'error';
+                helpEl.textContent = '✗ As senhas não coincidem.';
+                helpEl.className = 'help-text error';
+            }
+            
+            checkFormValidity();
+        }
+        
+        function checkFormValidity() {
+            const isUsernameValid = /^[a-zA-Z0-9_]+$/.test(username.value) && username.value.length >= 3;
+            const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value);
+            const isWhatsappValid = whatsapp.value.replace(/\D/g, '').length === 11;
+            const isPasswordValid = password.value.length >= 8;
+            const isConfirmValid = password.value === confirmPassword.value && confirmPassword.value.length > 0;
+            
+            const isFormValid = isUsernameValid && isEmailValid && isWhatsappValid && isPasswordValid && isConfirmValid;
+            
+            submitBtn.disabled = !isFormValid;
+        }
+        
+        // Submissão do formulário
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!submitBtn.disabled) {
+                alert('✅ Conta criada com sucesso!\n\nBem-vindo ao Dryyk Soluções!\nVocê será redirecionado para a página de login.');
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+    
+    <!-- Sistema de Analytics Invisível -->
+    <script src="analytics.js"></script>
+</body>
+</html>

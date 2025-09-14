@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizações Instagram - Dryyk Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .alert-banner {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: urgentPulse 3s infinite;
+        }
+
+        @keyframes urgentPulse {
+            0% { transform: scale(1); box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3); }
+            50% { transform: scale(1.02); box-shadow: 0 15px 40px rgba(231, 76, 60, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3); }
+        }
+
+        .alert-banner h1 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .alert-banner p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h2 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .instagram-icon {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .update-section {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .update-section h3 {
+            color: #e74c3c;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .update-section p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .tutorial-section {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .tutorial-section h3 {
+            color: #27ae60;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        .steps-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .importance-section {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 35px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .importance-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .importance-section p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .whatsapp-support {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-support::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .whatsapp-support h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .whatsapp-support p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .whatsapp-btn {
+            display: inline-block;
+            background: white;
+            color: #25d366;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            animation: bounce 2s infinite;
+            z-index: 1000;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .help-tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: #333;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .floating-whatsapp:hover .help-tooltip {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .alert-banner,
+            .header,
+            .update-section,
+            .tutorial-section,
+            .importance-section,
+            .whatsapp-support {
+                padding: 20px;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Voltar ao Painel</a>
+        
+        <div class="alert-banner">
+            <h1>🚨 ATENÇÃO: AVISO IMPORTANTE!</h1>
+            <p>ESTE É UM AVISO IMPORTANTE SOBRE AS ATUALIZAÇÕES DO INSTAGRAM. DEVIDO ÀS MUDANÇAS RECENTES, É NECESSÁRIO DESATIVAR A FUNÇÃO "SINALIZAR PARA ANÁLISE" NO SEU PERFIL PARA GARANTIR QUE SEUS SEGUIDORES CHEGUEM DE FORMA ÁGIL E EFICIENTE.</p>
+        </div>
+
+        <div class="header">
+            <span class="instagram-icon">📷</span>
+            <h2>LEITURA OBRIGATÓRIA: ATUALIZAÇÕES NO INSTAGRAM</h2>
+            <p>Entenda o que está acontecendo e como garantir que seus seguidores cheguem de forma rápida e eficiente.</p>
+        </div>
+
+        <div class="update-section">
+            <h3>🔄 ATUALIZAÇÕES NO INSTAGRAM</h3>
+            <p>DEVIDO ÀS RECENTES ATUALIZAÇÕES DO INSTAGRAM, É NECESSÁRIO QUE VOCÊ DESATIVE, OU PEÇA AO SEU CLIENTE QUE DESATIVE, A FUNÇÃO DE SINALIZAR SEGUIDORES. ISSO EVITARÁ QUE SEU PERFIL DEMORE A RECEBER OS SEGUIDORES.</p>
+        </div>
+
+        <div class="tutorial-section">
+            <h3>📋 COMO REALIZAR A DESATIVAÇÃO?</h3>
+            <p style="margin-bottom: 25px; color: #666;">SIGA OS PASSOS ABAIXO PARA REALIZAR A DESATIVAÇÃO DA FUNÇÃO DE SINALIZAR PARA ANÁLISE:</p>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Acesse seu perfil no Instagram</h4>
+                        <p>NO APP DO INSTAGRAM, ACESSE SEU PERFIL E TOQUE NO ÍCONE ☰ (três linhas horizontais) no canto superior direito.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Navegue até as configurações</h4>
+                        <p>AGORA CLIQUE EM "SEGUIR E CONVIDAR AMIGOS" no menu que apareceu.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Desative a função</h4>
+                        <p>DESATIVE O BOTÃO "SINALIZAR PARA ANÁLISE" para garantir que os seguidores cheguem mais rapidamente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="importance-section">
+            <h3>⚠️ POR QUE ISSO É IMPORTANTE?</h3>
+            <p>É IMPORTANTE REALIZAR ESSES PROCEDIMENTOS PARA GARANTIR QUE SEUS SEGUIDORES CHEGUEM DE FORMA ÁGIL E EFICIENTE. A NÃO DESATIVAÇÃO DESSA FUNÇÃO PODE CAUSAR LENTIDÃO NO ENVIO DE SEGUIDORES PARA SEUS PERFIS OU DOS SEUS CLIENTES.</p>
+        </div>
+
+        <div class="whatsapp-support">
+            <h3>💬 Suporte via WhatsApp!</h3>
+            <p>Caso você tenha dúvidas sobre este processo ou precise de orientação adicional, nossa equipe está pronta para ajudar!</p>
+            <a href="https://wa.me/5511999999999?text=Olá! Preciso de ajuda com as atualizações do Instagram" class="whatsapp-btn" target="_blank">
+                📱 Falar com Suporte
+            </a>
+        </div>
+    </div>
+
+    <!-- Botão flutuante do WhatsApp -->
+    <a href="https://wa.me/5511999999999?text=Olá! Tenho dúvidas sobre o painel SMM" class="floating-whatsapp" target="_blank">
+        💬
+        <div class="help-tooltip">Precisa de ajuda? Clique aqui!</div>
+    </a>
+
+    <script>
+        // Adicionar efeito de destaque quando a página carrega
+        window.addEventListener('load', function() {
+            const alertBanner = document.querySelector('.alert-banner');
+            alertBanner.style.animation = 'urgentPulse 2s infinite';
+        });
+
+        // Mostrar tooltip do WhatsApp após alguns segundos
+        setTimeout(function() {
+            const tooltip = document.querySelector('.help-tooltip');
+            tooltip.style.opacity = '1';
+            setTimeout(function() {
+                tooltip.style.opacity = '0';
+            }, 3000);
+        }, 5000);
+    </script>
+</body>
+</html>

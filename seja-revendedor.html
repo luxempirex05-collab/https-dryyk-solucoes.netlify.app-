@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seja um Revendedor - Dryyk Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .intro-section h2 {
+            color: #667eea;
+            font-size: 2.3rem;
+            margin-bottom: 20px;
+        }
+
+        .intro-section p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tips-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .tips-section h2 {
+            color: #667eea;
+            font-size: 2.3rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .tip-card {
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .tip-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .tip-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .tip-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .profit-section {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .profit-section h2 {
+            font-size: 2.3rem;
+            margin-bottom: 30px;
+        }
+
+        .profit-example {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .profit-calculation {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .calc-row:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .price-table {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .price-table h2 {
+            color: #667eea;
+            font-size: 2.3rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .pricing-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .pricing-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .pricing-table tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+
+        .pricing-table tr:hover {
+            background: #e8f0fe;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .our-price {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .suggested-price {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        .profit {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .faq-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .faq-section h2 {
+            color: #667eea;
+            font-size: 2.3rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .faq-container {
+            display: grid;
+            gap: 15px;
+        }
+
+        .faq-item {
+            border: 2px solid #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #667eea;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #f8f9ff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #e8f0fe;
+        }
+
+        .faq-question h4 {
+            color: #333;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: #667eea;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 300px;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .success-section {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .success-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #f39c12;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .cta-button.secondary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .intro-section,
+            .tips-section,
+            .profit-section,
+            .price-table,
+            .faq-section,
+            .success-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Voltar ao Painel</a>
+        
+        <div class="header">
+            <h1>🤝 Seja um Revendedor</h1>
+            <p>Transforme sua paixão por redes sociais em uma fonte de renda lucrativa</p>
+        </div>
+
+        <div class="intro-section">
+            <h2>💰 Jornada Lucrativa como Revendedor</h2>
+            <p>Iniciar sua jornada como revendedor pode ser altamente lucrativo. No Dryyk Soluções, não apenas oferecemos preços competitivos, mas também apoiamos você com dicas essenciais para começar sua própria operação de sucesso.</p>
+        </div>
+
+        <div class="tips-section">
+            <h2>🎯 Dicas Essenciais para o Sucesso</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <h3>Profissionalismo na Rede Social</h3>
+                    <p>Torne seu perfil mais profissional para transmitir confiança aos seus clientes em potencial. Use uma foto de perfil clara, bio informativa e mantenha um feed organizado.</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <h3>Comece com sua Rede Pessoal</h3>
+                    <p>Ofereça nossos serviços a amigos, familiares e conhecidos para construir sua base inicial de clientes e ganhar experiência no atendimento.</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <h3>Atendimento Excepcional</h3>
+                    <p>Seja sempre educado e atencioso. Clientes satisfeitos tendem a comprar mais. Considere oferecer bônus como curtidas ou visualizações para cativar novos clientes.</p>
+                </div>
+
+                <div class="tip-card">
+                    <div class="tip-number">4</div>
+                    <h3>Segurança nas Transações</h3>
+                    <p>Envie o serviço somente após receber o pagamento para evitar riscos de calote. Estabeleça políticas claras de pagamento desde o início.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="profit-section">
+            <h2>📊 Após a Venda: Calculando seus Ganhos</h2>
+            <p style="margin-bottom: 30px; font-size: 1.2rem;">Após realizar uma venda, é hora de calcular seus ganhos. Veja um exemplo prático:</p>
+            
+            <div class="profit-example">
+                <h3 style="margin-bottom: 20px;">Exemplo: 1.000 Seguidores</h3>
+                <div class="profit-calculation">
+                    <div class="calc-row">
+                        <span>Preço de venda para o cliente:</span>
+                        <span>R$ 20,00</span>
+                    </div>
+                    <div class="calc-row">
+                        <span>Seu custo conosco:</span>
+                        <span>R$ 2,50</span>
+                    </div>
+                    <div class="calc-row">
+                        <span>Seu lucro líquido:</span>
+                        <span>R$ 17,50</span>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 1.1rem;">💡 <strong>Margem de lucro: 87.5%</strong></p>
+            </div>
+        </div>
+
+        <div class="price-table">
+            <h2>💼 Exemplo de Tabela de Preços Personalizada</h2>
+            <div class="table-container">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Serviço</th>
+                            <th>Nosso Preço</th>
+                            <th>Preço Sugerido</th>
+                            <th>Seu Lucro</th>
+                            <th>Margem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="service-name">1.000 Seguidores Instagram</td>
+                            <td class="our-price">R$ 2,50</td>
+                            <td class="suggested-price">R$ 20,00</td>
+                            <td class="profit">R$ 17,50</td>
+                            <td>87.5%</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">1.000 Curtidas Instagram</td>
+                            <td class="our-price">R$ 1,20</td>
+                            <td class="suggested-price">R$ 8,00</td>
+                            <td class="profit">R$ 6,80</td>
+                            <td>85%</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">10.000 Visualizações</td>
+                            <td class="our-price">R$ 0,80</td>
+                            <td class="suggested-price">R$ 5,00</td>
+                            <td class="profit">R$ 4,20</td>
+                            <td>84%</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">1.000 Seguidores TikTok</td>
+                            <td class="our-price">R$ 3,00</td>
+                            <td class="suggested-price">R$ 25,00</td>
+                            <td class="profit">R$ 22,00</td>
+                            <td>88%</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name">1.000 Curtidas TikTok</td>
+                            <td class="our-price">R$ 1,50</td>
+                            <td class="suggested-price">R$ 10,00</td>
+                            <td class="profit">R$ 8,50</td>
+                            <td>85%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>❓ Perguntas Frequentes</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Como posso começar como revendedor?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para começar como revendedor, basta criar sua conta no Dryyk Soluções, adicionar saldo e começar a oferecer nossos serviços. Não há taxa de inscrição ou requisitos mínimos. Você pode começar pequeno e crescer gradualmente.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Quais são os benefícios de revender os serviços do Dryyk Soluções?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Os benefícios incluem: preços extremamente competitivos, margens de lucro altas (até 90%), entrega rápida e confiável, suporte 24/7, sem investimento inicial alto, e acesso a uma ampla gama de serviços para todas as principais redes sociais.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>É seguro revender seguidores?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, é completamente seguro quando feito corretamente. Nossos serviços seguem as diretrizes das plataformas e utilizamos métodos aprovados. Sempre informe seus clientes sobre as práticas recomendadas e mantenha perfis públicos durante o processo.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Como posso receber suporte em caso de dúvidas?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oferecemos suporte completo através de WhatsApp, ticket no painel e chat online. Nossa equipe está disponível 24/7 para ajudar com qualquer dúvida sobre produtos, pedidos ou estratégias de revenda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="success-section">
+            <h2>🚀 Desejamos muito sucesso e ótimas vendas!</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px;">Comece sua jornada como revendedor hoje mesmo e transforme sua paixão por redes sociais em uma fonte de renda consistente.</p>
+            <a href="adicionar-saldo.html" class="cta-button">💰 Adicionar Saldo e Começar</a>
+            <a href="nossos-servicos.html" class="cta-button secondary">⭐ Ver Todos os Serviços</a>
+        </div>
+    </div>
+
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

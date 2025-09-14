@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Fazer Pedido - Dryyk Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .alert-section {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: alertPulse 3s infinite;
+        }
+
+        @keyframes alertPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .alert-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .service-info {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-info h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .service-info p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .price-tag {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .tutorial-section {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .tutorial-section h3 {
+            color: #27ae60;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .steps-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .warning-section {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .warning-section h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .warning-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .warning-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .warning-list li:before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .reposition-section {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .reposition-section h3 {
+            color: #8e44ad;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .rules-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .rules-list li {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 8px;
+            border-left: 4px solid #8e44ad;
+            line-height: 1.6;
+        }
+
+        .no-reposition {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .no-reposition h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .socialblade-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 2px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .socialblade-link:hover {
+            color: #764ba2;
+            border-color: #764ba2;
+        }
+
+        .cta-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .cta-button.secondary {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .alert-section,
+            .tutorial-section,
+            .warning-section,
+            .reposition-section,
+            .no-reposition,
+            .cta-section {
+                padding: 20px;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Voltar ao Painel</a>
+        
+        <div class="header">
+            <h1>📋 Como Fazer Pedido</h1>
+            <p>Guia completo para realizar seus pedidos com sucesso</p>
+        </div>
+
+        <div class="alert-section">
+            <h2>⚠️ ALERTA: LEIA A DESCRIÇÃO 📌 ANTES DE INICIAR OS SERVIÇOS! 🚀</h2>
+            <p>É fundamental ler todas as instruções antes de fazer qualquer pedido para garantir o sucesso da sua compra.</p>
+        </div>
+
+        <div class="service-info">
+            <h3>📂 Categoria: ➡️ PRIMEIRO CLIQUE AQUI</h3>
+            <h4>🔧 Serviço ID: 1785</h4>
+            <p><strong>Descrição do Serviço:</strong> Tutorial completo para realizar pedidos no painel SMM</p>
+            <div class="price-tag">💰 R$ 33,60 por 1000</div>
+        </div>
+
+        <div class="tutorial-section">
+            <h3>📝 Passo a Passo para Realizar um Pedido</h3>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>➡️ CLIQUE EM NOVA ORDEM</h4>
+                        <p>Acesse a seção de novos pedidos no painel principal.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>➡️ SELECIONE A CATEGORIA QUE DESEJA</h4>
+                        <p>Escolha a categoria apropriada para o tipo de serviço que você quer contratar.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>➡️ SELECIONE O SERVIÇO DE SUA PREFERÊNCIA</h4>
+                        <p>Dentro da categoria, escolha o serviço específico que atende suas necessidades.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>➡️ COLOQUE O LINK DO PERFIL OU DA FOTO</h4>
+                        <p>Insira o link correto e SEMPRE leia a descrição do serviço antes de prosseguir.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>✅ EM ALGUNS MINUTOS SEU PEDIDO IRÁ INICIAR</h4>
+                        <p>Aguarde o processamento. O pedido será iniciado automaticamente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="warning-section">
+            <h3>⚠️ ATENÇÃO: Regras Importantes</h3>
+            <ul class="warning-list">
+                <li><strong>❌ Só faça um pedido para o mesmo PERFIL / LINK após o pedido anterior estiver sido completado.</strong></li>
+                <li><strong>👀 Caso faça um pedido em cima do outro para o mesmo link há grandes chances de perder um dos pedidos. FAÇA COM ATENÇÃO!!!</strong></li>
+                <li><strong>VERIFIQUE SE O PERFIL ESTÁ PÚBLICO E ABERTO PARA TODOS OS PAÍSES E IDADES.</strong></li>
+                <li><strong>✅ Caso ainda tenha dúvidas, entre em contato pelo WhatsApp ou Ticket!</strong></li>
+            </ul>
+        </div>
+
+        <div class="reposition-section">
+            <h3>🔄 Sobre Reposição</h3>
+            <p style="text-align: center; margin-bottom: 25px; color: #666;">Para que o seu pedido de reposição seja efetuado, você deve se encaixar em todas as regras abaixo:</p>
+            
+            <ul class="rules-list">
+                <li>➡️ O seu perfil deve permanecer como público.</li>
+                <li>➡️ Você não pode alterar o seu nome de usuário ou qualquer outra informação que permita identificar o perfil, como por exemplo o link.</li>
+                <li>➡️ A realização de um novo pedido para o mesmo link faz com que as reposições sejam baseadas nele, ignorando as compras anteriores.</li>
+                <li>➡️ A realização de um novo pedido não renova o prazo de reposição de pedidos anteriores.</li>
+                <li>➡️ A quantidade presente no perfil deve ser superior à quantidade inicial no momento do pedido.</li>
+                <li>➡️ A média de queda dos serviços é de menos de 15% para perfis novos que nunca efetuaram compra de seguidores.</li>
+                <li>➡️ A quantidade de reposição total para os serviços é de até 50% da quantidade contratada. Por exemplo: Você comprou 1.000 seguidores, o total reposto será de até 500 seguidores.</li>
+                <li>➡️ A reposição atua entre a quantidade inicial + Quantidade contratada = Quantidade Final.</li>
+                <li>➡️ O refil só acontece se a quantidade tiver menor do que o contratado.</li>
+                <li>➡️ Evite realizar pedidos pequenos para perfis com grandes quedas! Se estiver desconfiado, use o <a href="https://socialblade.com/" class="socialblade-link" target="_blank">SocialBlade</a> para verificar.</li>
+            </ul>
+        </div>
+
+        <div class="no-reposition">
+            <h3>🔴 SERVIÇOS SEM REPOSIÇÃO</h3>
+            <p style="margin-bottom: 20px;">Ao escolher um serviço que NÃO POSSUI garantia de reposição:</p>
+            <ul class="warning-list">
+                <li>➡️ Uma vez entregue o serviço, não aceitaremos reclamações quanto à queda na quantidade contratada.</li>
+                <li>➡️ Independente da quantidade que venha a cair, nós não nos responsabilizamos por tal queda, mesmo que seja de 100% do valor contratado.</li>
+                <li>⚠️ Se você for revendedor, seja transparente com o seu cliente, assim como nós estamos sendo com você.</li>
+                <li>⚠️ Caso você não concorde com as regras do servidor, não efetue um pedido no mesmo.</li>
+            </ul>
+        </div>
+
+        <div class="cta-section">
+            <h2 style="color: #667eea; margin-bottom: 20px;">🚀 Pronto para Começar?</h2>
+            <p style="color: #666; margin-bottom: 30px;">Agora que você conhece todas as regras, faça seu primeiro pedido com segurança!</p>
+            <a href="adicionar-saldo.html" class="cta-button">💰 Adicionar Saldo</a>
+            <a href="index.html" class="cta-button secondary">🎯 Fazer Pedido</a>
+        </div>
+    </div>
+</body>
+</html>

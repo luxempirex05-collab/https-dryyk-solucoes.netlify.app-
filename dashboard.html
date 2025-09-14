@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Dryyk Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .instagram-alert {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: alertPulse 3s infinite;
+        }
+
+        @keyframes alertPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .instagram-alert h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .instagram-alert p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .instagram-link {
+            display: inline-block;
+            background: white;
+            color: #e74c3c;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .instagram-link:hover {
+            transform: scale(1.05);
+        }
+
+        .user-welcome {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .user-welcome h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .user-welcome p {
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .stat-card.spent {
+            border-left: 5px solid #e74c3c;
+        }
+
+        .stat-card.orders {
+            border-left: 5px solid #f39c12;
+        }
+
+        .stat-card.available {
+            border-left: 5px solid #27ae60;
+        }
+
+        .order-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .order-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .category-select {
+            background: #f8f9ff;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .category-select h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .service-info {
+            background: #fff3cd;
+            border: 2px solid #f39c12;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .service-info h4 {
+            color: #f39c12;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .service-price {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .instructions {
+            background: #e8f5e8;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .instructions h4 {
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+
+        .instructions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .instructions li:before {
+            content: '➡️';
+            position: absolute;
+            left: 0;
+        }
+
+        .warnings {
+            background: #ffe6e6;
+            border-left: 5px solid #e74c3c;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .warnings h4 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+
+        .warnings ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .warnings li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .warnings li:before {
+            content: '❌';
+            position: absolute;
+            left: 0;
+        }
+
+        .refill-section {
+            background: #f0f8ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .refill-section h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .refill-rules {
+            list-style: none;
+            padding: 0;
+        }
+
+        .refill-rules li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .refill-rules li:before {
+            content: '➡️';
+            position: absolute;
+            left: 0;
+        }
+
+        .no-refill {
+            background: #ffe6e6;
+            border-left: 5px solid #e74c3c;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .no-refill h4 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+
+        .order-form {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .limits {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .socialblade-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .socialblade-link:hover {
+            text-decoration: underline;
+        }
+
+        .crypto-style-controls {
+            margin-top: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+        
+        .random-btn {
+            background: linear-gradient(135deg, #f7931a, #ff9500);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        
+        .random-btn:hover {
+            background: linear-gradient(135deg, #ff9500, #f7931a);
+            transform: translateY(-2px);
+        }
+        
+        .crypto-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #000;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+        
+        .crypto-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .crypto-value {
+            color: #f7931a;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(247, 147, 26, 0.3);
+        }
+        
+        .quantity-animation {
+             animation: cryptoFlicker 0.5s ease-in-out;
+         }
+         
+         .price-info {
+             text-align: center;
+             margin-top: 8px;
+             color: #888;
+             font-style: italic;
+         }
+         
+         @keyframes cryptoFlicker {
+             0% { background: #f7931a; color: #000; }
+             50% { background: #ff9500; color: #fff; }
+             100% { background: transparent; color: inherit; }
+         }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-section,
+            .user-welcome,
+            .instagram-alert {
+                padding: 20px;
+            }
+            
+            .crypto-style-controls {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Voltar ao Painel Principal</a>
+        
+        <div class="instagram-alert">
+            <h2>⚠️ ATENÇÃO: AVISO IMPORTANTE SOBRE AS ATUALIZAÇÕES DO INSTAGRAM</h2>
+            <p>DEVIDO ÀS MUDANÇAS RECENTES, É NECESSÁRIO DESATIVAR A FUNÇÃO "SINALIZAR PARA ANÁLISE" NO SEU PERFIL PARA GARANTIR QUE SEUS SEGUIDORES CHEGUEM DE FORMA ÁGIL E EFICIENTE.</p>
+            <a href="atualizacoes-instagram.html" class="instagram-link">📱 ACESSAR PÁGINA ATUALIZAÇÕES INSTAGRAM</a>
+        </div>
+
+        <div class="user-welcome">
+            <h2 id="welcomeUser">👋 Usuário</h2>
+            <p>Seja bem vindo(a)</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card spent">
+                <span class="stat-value">R$ 0,00</span>
+                <span class="stat-label">Saldo Gasto</span>
+            </div>
+            <div class="stat-card orders">
+                <span class="stat-value">0</span>
+                <span class="stat-label">Total de pedidos</span>
+            </div>
+            <div class="stat-card available">
+                <span class="stat-value">R$ 0,00</span>
+                <span class="stat-label">Saldo Disponível</span>
+            </div>
+        </div>
+
+        <div class="order-section">
+            <h3>📋 Fazer Novo Pedido</h3>
+            
+            <div class="category-select">
+                <h4>Categoria</h4>
+                <p>➡️ PRIMEIRO CLIQUE AQUI</p>
+            </div>
+
+            <div class="service-info">
+                <h4>Serviço</h4>
+                <p><strong>1785 - ⚠️ ALERTA: LEIA A DESCRIÇÃO 📌 ANTES DE INICIAR OS SERVIÇOS! 🚀</strong></p>
+                <p class="service-price">R$ 33,60 por 1000</p>
+            </div>
+
+            <div class="instructions">
+                <h4>📝 Descrição - Como realizar um pedido:</h4>
+                <p><strong>Olá, Para realizar um pedido siga esse passo a passo!</strong></p>
+                <ul>
+                    <li>CLIQUE EM NOVA ORDEM</li>
+                    <li>SELECIONE A CATEGORIA QUE DESEJA</li>
+                    <li>SELECIONE O SERVIÇO DE SUA PREFERÊNCIA</li>
+                    <li>COLOQUE O LINK DO PERFIL OU DA FOTO QUE DESEJA, LEIA SEMPRE A DESCRIÇÃO DO SERVIÇO.</li>
+                </ul>
+                <p><strong>✅ EM ALGUNS MINUTOS SEU PEDIDO IRÁ INICIAR</strong></p>
+                <p><strong>VERIFIQUE SE O PERFIL ESTÁ PÚBLICO E ABERTO PARA TODOS OS PAÍSES E IDADES.</strong></p>
+                <p><strong>✅ Caso ainda tenha dúvidas, entre em contato pelo WhatsApp ou Ticket!</strong></p>
+            </div>
+
+            <div class="warnings">
+                <h4>⚠️ Avisos Importantes:</h4>
+                <ul>
+                    <li>Só faça um pedido para o mesmo PERFIL / LINK após o pedido anterior estiver sido completado.</li>
+                    <li>Caso faça um pedido em cima do outro para o mesmo link há grandes chances de perder um dos pedidos. FAÇA COM ATENÇÃO!!!</li>
+                </ul>
+            </div>
+
+            <div class="refill-section">
+                <h4>🔄 Sobre Reposição</h4>
+                <p><strong>✅ Para que o seu pedido de reposição seja efetuado, você deve se encaixar em todas as regras abaixo:</strong></p>
+                <ul class="refill-rules">
+                    <li>O seu perfil deve permanecer como público.</li>
+                    <li>Você não pode alterar o seu nome de usuário ou qualquer outra informação que permita identificar o perfil, como por exemplo o link.</li>
+                    <li>A realização de um novo pedido para o mesmo link faz com que as reposições sejam baseadas nele, ignorando as compras anteriores.</li>
+                    <li>A realização de um novo pedido não renova o prazo de reposição de pedidos anteriores.</li>
+                    <li>A quantidade presente no perfil deve ser superior à quantidade inicial no momento do pedido.</li>
+                    <li>A média de queda dos serviços é de menos de 15% para perfis novos que nunca efetuaram compra de seguidores.</li>
+                    <li>A quantidade de reposição total para os serviços é de até 50% da quantidade contratada. Por exemplo: Você comprou 1.000 seguidores, o total reposto será de até 500 seguidores.</li>
+                    <li>A reposição atua entre a quantidade inicial + Quantidade contratada = Quantidade Final.</li>
+                    <li>O refil só acontece se a quantidade tiver menor do que o contratado.</li>
+                    <li>Evite realizar pedidos pequenos para perfis com grandes quedas! Se estiver desconfiado, use o <a href="https://socialblade.com/" class="socialblade-link" target="_blank">SocialBlade</a> para verificar.</li>
+                </ul>
+            </div>
+
+            <div class="no-refill">
+                <h4>🔴 SERVIÇOS SEM REPOSIÇÃO</h4>
+                <p><strong>Ao escolher um serviço que NÃO POSSUI garantia de reposição:</strong></p>
+                <ul>
+                    <li>Uma vez entregue o serviço, não aceitaremos reclamações quanto à queda na quantidade contratada.</li>
+                    <li>Independente da quantidade que venha a cair, nós não nos responsabilizamos por tal queda, mesmo que seja de 100% do valor contratado.</li>
+                </ul>
+                <p><strong>⚠️ Se você for revendedor, seja transparente com o seu cliente, assim como nós estamos sendo com você.</strong></p>
+                <p><strong>⚠️ Caso você não concorde com as regras do servidor, não efetue um pedido no mesmo.</strong></p>
+            </div>
+
+            <div class="order-form">
+                <h4>📝 Fazer Pedido</h4>
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label for="link">Link</label>
+                        <input type="url" id="link" placeholder="https://www.instagram.com/luxempirex7?igsh=MTN1N2hrczd2ZDI0Zg==" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quantity">Quantidade</label>
+                <input type="number" id="quantity" min="100" max="5000000" value="100" required>
+                <div class="limits">Min: 100 - Max: 5.000.000</div>
+                <div class="crypto-style-controls">
+                    <button type="button" class="random-btn" onclick="generateRandomQuantity()">🎲 Quantidade Aleatória</button>
+                    <div class="crypto-display">
+                        <span class="crypto-label">Valor Total:</span>
+                        <span class="crypto-value" id="cryptoValue">R$ 0,00</span>
+                    </div>
+                    <div class="price-info">
+                         <small>Preço por unidade: R$ 0,0336</small>
+                     </div>
+                </div>
+                    </div>
+                    
+
+                    
+                    <button type="submit" class="submit-btn">🚀 Fazer Pedido</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const link = document.getElementById('link').value;
+            const quantity = document.getElementById('quantity').value;
+            
+            if (!link) {
+                alert('⚠️ Por favor, insira um link válido.');
+                return;
+            }
+            
+            if (quantity < 100 || quantity > 5000000) {
+                 alert('⚠️ A quantidade deve ser entre 100 e 5.000.000.');
+                 return;
+             }
+            
+            alert('✅ Pedido enviado com sucesso!\n\nLink: ' + link + '\nQuantidade: ' + quantity + '\n\nSeu pedido será processado em alguns minutos.');
+        });
+    </script>
+    
+    <!-- Sistema de Usuário Dinâmico -->
+    <script>
+        // Carregar dados do usuário logado
+        function loadUserData() {
+            const loggedUser = localStorage.getItem('dryyk_logged_user');
+            
+            // Verificar se usuário está logado
+            if (!loggedUser) {
+                alert('⚠️ Acesso negado!\n\nVocê precisa fazer login para acessar o dashboard.');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const welcomeElement = document.getElementById('welcomeUser');
+            
+            if (loggedUser && welcomeElement) {
+                welcomeElement.textContent = '👋 ' + loggedUser;
+            }
+            
+            // Salvar também como currentUser para compatibilidade
+            localStorage.setItem('currentUser', loggedUser);
+        }
+        
+        // Função para gerar quantidade aleatória no estilo Bitcoin
+         function generateRandomQuantity() {
+             const quantityField = document.getElementById('quantity');
+             const cryptoValueField = document.getElementById('cryptoValue');
+             
+             // Gerar quantidade aleatória entre 100 e 5000000
+              const randomQuantity = Math.floor(Math.random() * (5000000 - 100 + 1)) + 100;
+             
+             // Animação de mudança
+             quantityField.classList.add('quantity-animation');
+             
+             // Simular carregamento como Bitcoin
+             let counter = 0;
+             const interval = setInterval(() => {
+                  const tempQuantity = Math.floor(Math.random() * (5000000 - 100 + 1)) + 100;
+                  quantityField.value = tempQuantity;
+                  
+                  // Calcular valor em reais (R$ 0,0336 por unidade)
+                   const realValue = (tempQuantity * 0.0336).toFixed(2);
+                   cryptoValueField.textContent = `R$ ${realValue.replace('.', ',')}`;
+                  
+                  counter++;
+                  if (counter >= 10) {
+                      clearInterval(interval);
+                      quantityField.value = randomQuantity;
+                      
+                      // Valor final em reais
+                       const finalRealValue = (randomQuantity * 0.0336).toFixed(2);
+                       cryptoValueField.textContent = `R$ ${finalRealValue.replace('.', ',')}`;
+                      
+                      // Remover animação
+                      setTimeout(() => {
+                          quantityField.classList.remove('quantity-animation');
+                      }, 500);
+                  }
+              }, 100);
+         }
+         
+         // Atualizar valor Bitcoin quando quantidade mudar
+         document.addEventListener('DOMContentLoaded', function() {
+             const quantityField = document.getElementById('quantity');
+             const cryptoValueField = document.getElementById('cryptoValue');
+             
+             quantityField.addEventListener('input', function() {
+                   const quantity = parseInt(this.value) || 0;
+                   const realValue = (quantity * 0.0336).toFixed(2);
+                   cryptoValueField.textContent = `R$ ${realValue.replace('.', ',')}`;
+               });
+               
+               // Valor inicial
+               const initialQuantity = parseInt(quantityField.value) || 0;
+               const initialRealValue = (initialQuantity * 0.0336).toFixed(2);
+               cryptoValueField.textContent = `R$ ${initialRealValue.replace('.', ',')}`;
+          }
+         });
+         
+         // Executar quando a página carregar
+         document.addEventListener('DOMContentLoaded', loadUserData);
+     </script>
+</body>
+</html>

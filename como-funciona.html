@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Funciona o Painel - Dryyk Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .intro-section h2 {
+            color: #667eea;
+            font-size: 2.3rem;
+            margin-bottom: 20px;
+        }
+
+        .intro-section p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .steps-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .steps-section h2 {
+            color: #667eea;
+            font-size: 2.3rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .step-category {
+            margin-bottom: 40px;
+        }
+
+        .step-category h3 {
+            color: #f39c12;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f39c12;
+        }
+
+        .steps-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            padding: 25px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+
+        .step-content h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .step-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .order-steps {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        .order-steps h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .order-step {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .order-step-number {
+            background: white;
+            color: #27ae60;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .order-step-content h4 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .order-step-content p {
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .important-notes {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        .important-notes h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .note-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .note-item h4 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .note-item p {
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .delivery-info {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #667eea;
+        }
+
+        .delivery-info h3 {
+            color: #667eea;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .delivery-info p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .cta-button.secondary {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .cta-button.tertiary {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .intro-section,
+            .steps-section,
+            .order-steps,
+            .important-notes,
+            .cta-section {
+                padding: 25px;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .notes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Voltar ao Painel</a>
+        
+        <div class="header">
+            <h1>📚 Como Funciona o Nosso Painel</h1>
+            <p>Guia completo para usar o Dryyk Soluções e fazer seus pedidos</p>
+        </div>
+
+        <div class="intro-section">
+            <h2>🎯 Entenda Nosso Painel</h2>
+            <p>Nosso painel SMM (Social Media Marketing) é uma plataforma onde você pode comprar serviços de mídia social, como seguidores, curtidas, visualizações e muito mais. É fácil de usar e oferece uma variedade de opções para atender às suas necessidades.</p>
+        </div>
+
+        <div class="steps-section">
+            <h2>💰 Primeiro Passo: Adicionar Saldo</h2>
+            
+            <div class="step-category">
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Faça login no seu painel</h4>
+                            <p>Acesse sua conta usando suas credenciais de login no painel Dryyk Soluções.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Navegue até a seção de adicionar saldo</h4>
+                            <p>Encontre e clique na opção "Adicionar Saldo" no menu principal do painel.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Escolha o método de pagamento desejado</h4>
+                            <p>Selecione entre PIX, cartão de crédito ou outros métodos disponíveis.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Insira o valor e confirme o pagamento</h4>
+                            <p>Digite o valor que deseja adicionar e confirme o pagamento para creditar em sua conta.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="order-steps">
+            <h3>🛒 Como Fazer um Pedido</h3>
+            
+            <div class="order-step">
+                <div class="order-step-number">1</div>
+                <div class="order-step-content">
+                    <h4>Selecione o serviço do seu interesse no painel</h4>
+                    <p>Browse através das categorias e escolha o serviço que melhor atende suas necessidades.</p>
+                </div>
+            </div>
+            
+            <div class="order-step">
+                <div class="order-step-number">2</div>
+                <div class="order-step-content">
+                    <h4>Informe o Username ou Link conforme solicitado</h4>
+                    <p>Insira o link do perfil ou post onde você deseja aplicar o serviço.</p>
+                </div>
+            </div>
+            
+            <div class="order-step">
+                <div class="order-step-number">3</div>
+                <div class="order-step-content">
+                    <h4>Informe a quantidade desejada do serviço</h4>
+                    <p>Especifique quantos seguidores, curtidas ou visualizações você deseja.</p>
+                </div>
+            </div>
+            
+            <div class="order-step">
+                <div class="order-step-number">4</div>
+                <div class="order-step-content">
+                    <h4>Clique em "Comprar" para finalizar o pedido</h4>
+                    <p>Revise as informações e clique no botão de compra para processar seu pedido.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="important-notes">
+            <h3>⚠️ Notas Importantes</h3>
+            
+            <div class="notes-grid">
+                <div class="note-item">
+                    <h4>🔄 Pedidos Sequenciais</h4>
+                    <p>Por favor, envie serviços para o mesmo perfil apenas após o pedido anterior ser concluído.</p>
+                </div>
+                
+                <div class="note-item">
+                    <h4>👤 Nome de Usuário</h4>
+                    <p>Informe o nome de usuário sem o símbolo @ para garantir o processamento correto.</p>
+                </div>
+                
+                <div class="note-item">
+                    <h4>🔍 Perfil Público</h4>
+                    <p>Certifique-se de que seu perfil está público para que os serviços possam ser entregues.</p>
+                </div>
+                
+                <div class="note-item">
+                    <h4>📋 Leia as Descrições</h4>
+                    <p>Sempre leia a descrição completa do serviço antes de fazer o pedido.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="delivery-info">
+            <h3>⏰ Tempo de Entrega</h3>
+            <p><strong>Nota:</strong> A entrega dos serviços pode variar de 3 minutos a 24 horas, dependendo do tipo de serviço escolhido. Serviços mais complexos podem levar mais tempo para serem processados.</p>
+        </div>
+
+        <div class="cta-section">
+            <h2 style="color: #667eea; margin-bottom: 20px;">🚀 Pronto para Começar?</h2>
+            <p style="color: #666; margin-bottom: 30px;">Agora que você sabe como funciona, comece a usar nosso painel!</p>
+            <a href="adicionar-saldo.html" class="cta-button">💰 Adicionar Saldo</a>
+            <a href="dashboard.html" class="cta-button secondary">📝 Fazer Pedido</a>
+            <a href="nossos-servicos.html" class="cta-button tertiary">⭐ Ver Serviços</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Serviços - Dryyk Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .alert-section {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: alertPulse 3s infinite;
+        }
+
+        @keyframes alertPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .categories-nav {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .categories-nav h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .category-btn {
+            display: block;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9ff, #e8f0fe);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .services-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .services-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .services-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .services-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 10px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #ddd;
+        }
+
+        .services-table td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+        .services-table tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+
+        .services-table tr:hover {
+            background: #e8f0fe;
+        }
+
+        .service-id {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .price {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .limits {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .time {
+            color: #f39c12;
+            font-size: 0.85rem;
+        }
+
+        .description {
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .highlight-service {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7) !important;
+            border-left: 4px solid #f39c12 !important;
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .no-refill {
+            background: #e74c3c;
+        }
+
+        .with-refill {
+            background: #27ae60;
+        }
+
+        .cta-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .cta-button.secondary {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .calculator-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .calculator-section h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        
+        .price-calculator {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .calc-row {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .calc-row label {
+            min-width: 150px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .calc-row select,
+        .calc-row input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            color: #333;
+        }
+        
+        .total-price {
+            flex: 1;
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .calc-info {
+            text-align: center;
+            margin-top: 15px;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .services-table {
+                font-size: 0.8rem;
+            }
+            
+            .services-table th,
+            .services-table td {
+                padding: 8px 5px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calc-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            
+            .calc-row label {
+                min-width: auto;
+            }
+            
+            .calculator-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Voltar ao Painel</a>
+        
+        <div class="header">
+            <h1>🎯 Nossos Serviços</h1>
+            <p>Serviços completos para TikTok com a melhor qualidade do mercado</p>
+        </div>
+
+        <div class="alert-section">
+            <h2>⚠️ PRIMEIRO CLIQUE AQUI - LEIA ANTES DE USAR!</h2>
+            <p>Leia todas as descrições e instruções antes de fazer qualquer pedido para garantir o melhor resultado.</p>
+        </div>
+
+        <div class="categories-nav">
+            <h3>📂 Categorias de Serviços</h3>
+            <div class="categories-grid">
+                <a href="#primeiro" class="category-btn">➡️ PRIMEIRO CLIQUE AQUI</a>
+                <a href="#visualizacoes" class="category-btn">👀 Visualizações em Vídeos</a>
+                <a href="#curtidas-mundiais" class="category-btn">🖤 Curtidas Mundiais</a>
+                <a href="#curtidas-brasileiras" class="category-btn">🖤 Curtidas Brasileiras</a>
+                <a href="#seguidores-mundiais" class="category-btn">⚫ Seguidores Mundiais</a>
+                <a href="#seguidores-brasileiros" class="category-btn">⚫ Seguidores Brasileiros</a>
+                <a href="#espectadores" class="category-btn">📺 Espectadores em Live</a>
+                <a href="#denuncias" class="category-btn">🚫 Denúncias</a>
+                <a href="#metricas" class="category-btn">📊 Métricas</a>
+            </div>
+        </div>
+
+        <div class="calculator-section">
+            <h3>🧮 Calculadora de Preços</h3>
+            <div class="price-calculator">
+                <div class="calc-row">
+                    <label for="serviceSelect">Escolha o Serviço:</label>
+                    <select id="serviceSelect" onchange="updateCalculator()">
+                        <option value="0.0336">Tutorial (ID: 1785) - R$ 33,60/1000</option>
+                        <option value="0.10">Visualizações TikTok (ID: 1786) - R$ 0,10/1000</option>
+                        <option value="0.24">Visualizações TikTok Premium (ID: 1811) - R$ 0,24/1000</option>
+                        <option value="4.02">Curtidas Mundiais (ID: 1804) - R$ 4,02/1000</option>
+                        <option value="2.70">Curtidas Brasileiras (ID: 1792) - R$ 2,70/1000</option>
+                        <option value="33.60">Seguidores Mundiais (ID: 1793) - R$ 33,60/1000</option>
+                        <option value="77.00">Seguidores Brasileiros (ID: 1795) - R$ 77,00/1000</option>
+                    </select>
+                </div>
+                <div class="calc-row">
+                    <label for="quantityInput">Quantidade Desejada:</label>
+                    <input type="number" id="quantityInput" min="1" max="10000000" placeholder="Digite a quantidade" oninput="calculatePrice()">
+                </div>
+                <div class="calc-row">
+                    <label>Valor Total:</label>
+                    <div class="total-price" id="totalPrice">R$ 0,00</div>
+                </div>
+                <div class="calc-info">
+                    <small>💡 O cálculo é feito automaticamente baseado na quantidade e preço por 1000 unidades</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="services-section" id="primeiro">
+            <h3>➡️ PRIMEIRO CLIQUE AQUI</h3>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Serviço</th>
+                        <th>Taxa por 1000</th>
+                        <th>Ordem Mínima</th>
+                        <th>Pedido Máximo</th>
+                        <th>Tempo Médio</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight-service">
+                        <td class="service-id">1785</td>
+                        <td class="service-name">⚠️ ALERTA: LEIA A DESCRIÇÃO 📌 ANTES DE INICIAR OS SERVIÇOS! 🚀</td>
+                        <td class="price">R$ 33,60</td>
+                        <td class="limits">1</td>
+                        <td class="limits">1</td>
+                        <td class="time">Não há dados suficientes</td>
+                        <td class="description">Tutorial obrigatório - Leia todas as instruções antes de usar qualquer serviço!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="services-section" id="visualizacoes">
+            <h3>👀 TTK | Visualização em Vídeos</h3>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Serviço</th>
+                        <th>Taxa por 1000</th>
+                        <th>Ordem Mínima</th>
+                        <th>Pedido Máximo</th>
+                        <th>Tempo Médio</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-id">1786</td>
+                        <td class="service-name">Visualizações em Tik Tok | 🚀 Funcionando Atualmente</td>
+                        <td class="price">R$ 0.10</td>
+                        <td class="limits">1000</td>
+                        <td class="limits">1000000000</td>
+                        <td class="time">1 Momento, 4 Minutos</td>
+                        <td class="description">Visualizações rápidas e eficazes para seus vídeos do TikTok</td>
+                    </tr>
+                    <tr>
+                        <td class="service-id">1811</td>
+                        <td class="service-name">👀Visualizações em Tik Tok | 🚀 Funcionando Atualmente</td>
+                        <td class="price">R$ 0.24</td>
+                        <td class="limits">1000</td>
+                        <td class="limits">1000000000</td>
+                        <td class="time">2 Momento, 308 Minutos</td>
+                        <td class="description">Visualizações premium com maior retenção</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="services-section" id="curtidas-mundiais">
+            <h3>🖤 TTK | Curtidas Mundiais</h3>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Serviço</th>
+                        <th>Taxa por 1000</th>
+                        <th>Ordem Mínima</th>
+                        <th>Pedido Máximo</th>
+                        <th>Tempo Médio</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-id">1804</td>
+                        <td class="service-name">TikTok - Curtidas Mundiais | Sem Queda🔥| Rápido⚡️ <span class="premium-badge with-refill">♻️Reposição 365 dias</span></td>
+                        <td class="price">R$ 4.02</td>
+                        <td class="limits">100</td>
+                        <td class="limits">1000000</td>
+                        <td class="time">4 Momento, 135 Minutos</td>
+                        <td class="description">Curtidas de alta qualidade com garantia de reposição por 1 ano</td>
+                    </tr>
+                    <tr>
+                        <td class="service-id">1805</td>
+                        <td class="service-name">TikTok - Curtidas Mundiais | Rápido⚡| Sem Queda🔥 <span class="premium-badge no-refill">❌SR</span></td>
+                        <td class="price">R$ 3.66</td>
+                        <td class="limits">100</td>
+                        <td class="limits">1000000</td>
+                        <td class="time">2 Momento, 2 Minutos</td>
+                        <td class="description">Curtidas rápidas sem reposição</td>
+                    </tr>
+                    <tr>
+                        <td class="service-id">1806</td>
+                        <td class="service-name">TikTok - Curtidas Mundiais | Super Rápido⚡| Sem Queda🔥 <span class="premium-badge no-refill">❌SR</span></td>
+                        <td class="price">R$ 3.78</td>
+                        <td class="limits">100</td>
+                        <td class="limits">1000000</td>
+                        <td class="time">Não há dados suficientes</td>
+                        <td class="description">Curtidas super rápidas sem reposição</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="services-section" id="curtidas-brasileiras">
+            <h3>🖤 TTK | Curtidas Brasileiras</h3>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Serviço</th>
+                        <th>Taxa por 1000</th>
+                        <th>Ordem Mínima</th>
+                        <th>Pedido Máximo</th>
+                        <th>Tempo Médio</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-id">1792</td>
+                        <td class="service-name">🖤TikTok - Curtidas Brasileiras | Rápido ⚡ <span class="premium-badge with-refill">♻️ Reposição 30 dias</span></td>
+                        <td class="price">R$ 2.70</td>
+                        <td class="limits">100</td>
+                        <td class="limits">5000000</td>
+                        <td class="time">1 Momento, 19 Minutos</td>
+                        <td class="description">Curtidas de usuários brasileiros com reposição</td>
+                    </tr>
+                    <tr>
+                        <td class="service-id">1791</td>
+                        <td class="service-name">🖤TikTok - Curtidas Brasileiras + Visualizações | Premium⭐️ <span class="premium-badge with-refill">♻️Reposição 30 dias</span></td>
+                        <td class="price">R$ 2.94</td>
+                        <td class="limits">100</td>
+                        <td class="limits">500000</td>
+                        <td class="time">1 Momento, 1 Minutos</td>
+                        <td class="description">Combo: curtidas brasileiras + visualizações extras</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="services-section" id="seguidores-mundiais">
+            <h3>⚫ TTK | Seguidores Mundiais</h3>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Serviço</th>
+                        <th>Taxa por 1000</th>
+                        <th>Ordem Mínima</th>
+                        <th>Pedido Máximo</th>
+                        <th>Tempo Médio</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-id">1793</td>
+                        <td class="service-name">⚫TikTok | Seguidores Mundiais | Alta Qualidade⭐️ <span class="premium-badge no-refill">❌Sem Reposição</span></td>
+                        <td class="price">R$ 17.96</td>
+                        <td class="limits">100</td>
+                        <td class="limits">5000000</td>
+                        <td class="time">2 Momento, 327 Minutos</td>
+                        <td class="description">Seguidores mundiais de alta qualidade sem reposição</td>
+                    </tr>
+                    <tr>
+                        <td class="service-id">1794</td>
+                        <td class="service-name">⚫TikTok | Seguidores Mundiais | Alta Qualidade⭐️ <span class="premium-badge with-refill">♻️Reposição: 365 dias</span></td>
+                        <td class="price">R$ 23.92</td>
+                        <td class="limits">100</td>
+                        <td class="limits">5000000</td>
+                        <td class="time">1 Momento, 224 Minutos</td>
+                        <td class="description">Seguidores mundiais premium com reposição de 1 ano</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="services-section" id="seguidores-brasileiros">
+            <h3>⚫ TTK | Seguidores Brasileiros</h3>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Serviço</th>
+                        <th>Taxa por 1000</th>
+                        <th>Ordem Mínima</th>
+                        <th>Pedido Máximo</th>
+                        <th>Tempo Médio</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-id">1795</td>
+                        <td class="service-name">TikTok | Seguidores Brasileiros | Premium⭐️ <span class="premium-badge no-refill">❌Sem Reposição</span></td>
+                        <td class="price">R$ 77.00</td>
+                        <td class="limits">100</td>
+                        <td class="limits">100000</td>
+                        <td class="time">1 Gün, 3 Momento, 81 Minutos</td>
+                        <td class="description">Seguidores brasileiros premium sem reposição</td>
+                    </tr>
+                    <tr>
+                        <td class="service-id">1796</td>
+                        <td class="service-name">TikTok | Seguidores Brasileiros | Premium⭐️ <span class="premium-badge with-refill">♻️Reposição 30 dias</span></td>
+                        <td class="price">R$ 37.80</td>
+                        <td class="limits">100</td>
+                        <td class="limits">100000</td>
+                        <td class="time">1 Momento, 32 Minutos</td>
+                        <td class="description">Seguidores brasileiros premium com reposição de 30 dias</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="services-section" id="espectadores">
+            <h3>📺 TTK | Espectadores em Live</h3>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Serviço</th>
+                        <th>Taxa por 1000</th>
+                        <th>Ordem Mínima</th>
+                        <th>Pedido Máximo</th>
+                        <th>Tempo Médio</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-id">1807</td>
+                        <td class="service-name">Espectador em Live | 15 Minutos | Max 100K</td>
+                        <td class="price">R$ 14.10</td>
+                        <td class="limits">100</td>
+                        <td class="limits">100000</td>
+                        <td class="time">2 Gün, 1 Momento, 321 Minutos</td>
+                        <td class="description">Espectadores para live de 15 minutos</td>
+                    </tr>
+                    <tr>
+                        <td class="service-id">1808</td>
+                        <td class="service-name">Espectador em Live | 30 Minutos | Max 100K</td>
+                        <td class="price">R$ 28.20</td>
+                        <td class="limits">100</td>
+                        <td class="limits">100000</td>
+                        <td class="time">Não há dados suficientes</td>
+                        <td class="description">Espectadores para live de 30 minutos</td>
+                    </tr>
+                    <tr>
+                        <td class="service-id">1809</td>
+                        <td class="service-name">Espectador em Live | 60 Minutos | Max 100K</td>
+                        <td class="price">R$ 56.28</td>
+                        <td class="limits">100</td>
+                        <td class="limits">100000</td>
+                        <td class="time">Não há dados suficientes</td>
+                        <td class="description">Espectadores para live de 60 minutos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="services-section" id="denuncias">
+            <h3>🚫 TTK | Denúncias</h3>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Serviço</th>
+                        <th>Taxa por 1000</th>
+                        <th>Ordem Mínima</th>
+                        <th>Pedido Máximo</th>
+                        <th>Tempo Médio</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-id">1802</td>
+                        <td class="service-name">Denunciais em Videos do TikTok | 🚫</td>
+                        <td class="price">R$ 89.01</td>
+                        <td class="limits">1000</td>
+                        <td class="limits">1000000</td>
+                        <td class="time">Não há dados suficientes</td>
+                        <td class="description">Serviço de denúncias em vídeos do TikTok</td>
+                    </tr>
+                    <tr>
+                        <td class="service-id">1803</td>
+                        <td class="service-name">Denuncias em Perfil do Tik Tok | 🚫</td>
+                        <td class="price">R$ 99.27</td>
+                        <td class="limits">1000</td>
+                        <td class="limits">1000000</td>
+                        <td class="time">Não há dados suficientes</td>
+                        <td class="description">Serviço de denúncias em perfis do TikTok</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="services-section" id="metricas">
+            <h3>📊 TTK | Métricas</h3>
+            <table class="services-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Serviço</th>
+                        <th>Taxa por 1000</th>
+                        <th>Ordem Mínima</th>
+                        <th>Pedido Máximo</th>
+                        <th>Tempo Médio</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="service-id">1810</td>
+                        <td class="service-name">TikTok | compartilhamentos | Super Rápido⚡️ | ⏰Inicio: 0-5min</td>
+                        <td class="price">R$ 0.72</td>
+                        <td class="limits">100</td>
+                        <td class="limits">500000000</td>
+                        <td class="time">Não há dados suficientes</td>
+                        <td class="description">Compartilhamentos rápidos para seus vídeos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="cta-section">
+            <h2 style="color: #667eea; margin-bottom: 20px;">🚀 Pronto para Começar?</h2>
+            <p style="color: #666; margin-bottom: 30px;">Escolha os serviços ideais para impulsionar seu TikTok!</p>
+            <a href="adicionar-saldo.html" class="cta-button">💰 Adicionar Saldo</a>
+            <a href="como-fazer-pedido.html" class="cta-button secondary">📋 Como Fazer Pedido</a>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll para as categorias
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+    
+    <!-- JavaScript da Calculadora de Preços -->
+    <script>
+        function calculatePrice() {
+            const serviceSelect = document.getElementById('serviceSelect');
+            const quantityInput = document.getElementById('quantityInput');
+            const totalPriceElement = document.getElementById('totalPrice');
+            
+            const pricePerThousand = parseFloat(serviceSelect.value);
+            const quantity = parseInt(quantityInput.value) || 0;
+            
+            if (quantity > 0) {
+                // Calcular o valor total baseado na quantidade
+                const totalPrice = (quantity / 1000) * pricePerThousand;
+                
+                // Formatar para moeda brasileira
+                const formattedPrice = totalPrice.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2
+                });
+                
+                totalPriceElement.textContent = formattedPrice;
+                totalPriceElement.style.color = '#4CAF50';
+            } else {
+                totalPriceElement.textContent = 'R$ 0,00';
+                totalPriceElement.style.color = 'white';
+            }
+        }
+        
+        function updateCalculator() {
+            calculatePrice();
+        }
+        
+        // Inicializar calculadora
+        document.addEventListener('DOMContentLoaded', function() {
+            calculatePrice();
+        });
+    </script>
+</body>
+</html>()
